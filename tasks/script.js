@@ -25,18 +25,18 @@ domAccordionExample.addEventListener('click', (event) => {
 })
 
 const domTabs = document.querySelector(".tabsExample")
-const tabButton = document.querySelectorAll(".tabLink")
-const tabsContents = document.querySelectorAll(".tabContent")
+const domTabsButton = document.querySelectorAll(".tabLink")
+const domTabsContent = document.querySelectorAll(".tabContent")
 
 domTabs.addEventListener('click', (event) => {
 	const id = event.target.dataset.id
 	if (id) {
-		tabButton.forEach(btn => {
+		domTabsButton.forEach(btn => {
 			btn.classList.remove("active")
 		})
 		event.target.classList.add("active")
 
-		tabsContents.forEach(content => {
+		domTabsContent.forEach(content => {
 			content.classList.remove("active")
 		})
 		const element = document.getElementById(id)
