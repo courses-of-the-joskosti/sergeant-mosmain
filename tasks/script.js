@@ -1,7 +1,14 @@
-const domAccordionExample = document.querySelector('.accordionExample');
+const domAccordionExample = document.querySelector('.accordionExample')
+const domAccordionButtons = document.querySelectorAll('.accBtn')
 
 domAccordionExample.addEventListener('click', (event) => {
-	if (event.target.classList.contains('accBtn')) {
+	if (event.target.classList.contains('accBtn') && !event.target.classList.contains('active')) {
+		
+		domAccordionButtons.forEach(element => {
+			element.classList.remove('active')
+			element.nextElementSibling.style.display = 'none'
+		})
+
 		event.target.classList.toggle('active')
 		let accContent = event.target.nextElementSibling
 
@@ -10,6 +17,9 @@ domAccordionExample.addEventListener('click', (event) => {
 		} else {
 			accContent.style.display = "block"
 		}
+	} else {
+		event.target.classList.remove('active')
+		event.target.nextElementSibling.style.display = "none"
 	}
 })
 
@@ -68,34 +78,34 @@ function displayList(arrData, rowPerPage, page) {
 }
 
 function displayPagination(arrData, rowPerPage) {
-	const paginationEl = document.querySelector('.pagination');
-	const pagesCount = Math.ceil(arrData.length / rowPerPage);
-	const ulEl = document.createElement("ul");
+	const paginationEl = document.querySelector('.pagination')
+	const pagesCount = Math.ceil(arrData.length / rowPerPage)
+	const ulEl = document.createElement("ul")
 	ulEl.classList.add('pagination');
 
 	for (let i = 0; i < pagesCount; i++) {
-		const liEl = displayPaginationBtn(i + 1);
+		const liEl = displayPaginationBtn(i + 1)
 		ulEl.appendChild(liEl)
 	}
 	paginationEl.appendChild(ulEl)
 }
 
 function displayPaginationBtn(page, currentPage) {
-	const liEl = document.createElement("li");
+	const liEl = document.createElement("li")
 	liEl.classList.add('page-link')
 	liEl.innerText = page
 
-	if (currentPage === page) liEl.classList.add('active');
+	if (currentPage === page) liEl.classList.add('active')
 
 	liEl.addEventListener('click', () => {
 		currentPage = page
 		displayList(gitData, rows, currentPage)
 
-		let currentItemLi = document.querySelector('.active');
-		currentItemLi.classList.remove('active');
+		let currentItemLi = document.querySelector('.active')
+		currentItemLi.classList.remove('active')
 
-		liEl.classList.add('active');
+		liEl.classList.add('active')
 	})
 
-	return liEl;
+	return liEl
 }
