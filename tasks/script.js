@@ -1,6 +1,3 @@
-main()
-
-const accs = document.querySelectorAll('.accBtn')
 const domAccordionExample = document.querySelector('.accordionExample');
 
 domAccordionExample.addEventListener('click', (event) => {
@@ -15,38 +12,28 @@ domAccordionExample.addEventListener('click', (event) => {
 		}
 	}
 })
-// accs.forEach(function (accs) {
-// 	accs.addEventListener("click", function () {
-// 		this.classList.toggle('active')
-// 		let accContent = this.nextElementSibling
 
-// 		if (accContent.style.display === "block") {
-// 			accContent.style.display = "none"
-// 		} else {
-// 			accContent.style.display = "block"
-// 		}
-// 	})
-// })
-
-const tabs = document.querySelector(".tabsExample")
+const domTabs = document.querySelector(".tabsExample")
 const tabButton = document.querySelectorAll(".tabLink")
-const contents = document.querySelectorAll(".tabContent")
+const tabsContents = document.querySelectorAll(".tabContent")
 
-tabs.onclick = e => {
-	const id = e.target.dataset.id
+domTabs.addEventListener('click', (event) => {
+	const id = event.target.dataset.id
 	if (id) {
 		tabButton.forEach(btn => {
 			btn.classList.remove("active")
 		})
-		e.target.classList.add("active")
+		event.target.classList.add("active")
 
-		contents.forEach(content => {
+		tabsContents.forEach(content => {
 			content.classList.remove("active")
 		})
 		const element = document.getElementById(id)
 		element.classList.add("active")
 	}
-}
+})
+
+main()
 
 async function getData() {
 	const response = await fetch('https://api.github.com/users/mosmain/repos')
