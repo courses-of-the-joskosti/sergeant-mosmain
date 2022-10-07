@@ -3,7 +3,7 @@ const domAccordionButtons = document.querySelectorAll('.accBtn')
 
 domAccordionExample.addEventListener('click', (event) => {
 	if (event.target.classList.contains('accBtn') && !event.target.classList.contains('active')) {
-		
+
 		domAccordionButtons.forEach(element => {
 			element.classList.remove('active')
 			element.nextElementSibling.style.display = 'none'
