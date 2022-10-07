@@ -23,6 +23,8 @@ h1 {
 		border: none;
 		outline: none;
 		transition: 0.4s;
+		border-radius: 5px;
+		margin-top: 1em;
 
 		&:hover {
 			background-color: $color-block-active;
@@ -35,11 +37,13 @@ h1 {
 		background-color: $color-white;
 		overflow: hidden;
 		display: none;
+		border-radius: 0 0 5px 5px;
 	}
 
 	.active {
-		background-color: $color-white  !important;
+		background-color: $color-white !important;
 		color: $color-black-text;
+		border-radius: 5px 5px 0 0;
 	}
 }
 
@@ -84,7 +88,7 @@ h1 {
 	}
 
 	.active {
-		background-color: $color-white  !important;
+		background-color: $color-white !important;
 		color: $color-black-text;
 		display: block;
 	}
