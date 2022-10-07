@@ -2,6 +2,8 @@ const domAccordionExample = document.querySelector('.accordionExample')
 const domAccordionButtons = document.querySelectorAll('.accBtn')
 
 domAccordionExample.addEventListener('click', (event) => {
+	let accordionContent = event.target.nextElementSibling
+
 	if (event.target.classList.contains('accBtn') && !event.target.classList.contains('active')) {
 
 		domAccordionButtons.forEach(element => {
@@ -10,14 +12,13 @@ domAccordionExample.addEventListener('click', (event) => {
 		})
 
 		event.target.classList.toggle('active')
-		let accContent = event.target.nextElementSibling
-
-		if (accContent.style.display === "block") {
-			accContent.style.display = "none"
+		
+		if (accordionContent.style.display === "block") {
+			accordionContent.style.display = "none"
 		} else {
-			accContent.style.display = "block"
+			accordionContent.style.display = "block"
 		}
-	} else {
+	} else if (event.target.classList.contains('active')) {
 		event.target.classList.remove('active')
 		event.target.nextElementSibling.style.display = "none"
 	}
