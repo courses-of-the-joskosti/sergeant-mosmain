@@ -38,12 +38,17 @@ h1 {
 		overflow: hidden;
 		display: none;
 		border-radius: 0 0 5px 5px;
+
+		p {
+			margin: 18px 0;
+		}
 	}
 
 	.active {
 		background-color: $color-white !important;
 		color: $color-black-text;
 		border-radius: 5px 5px 0 0;
+		border-bottom: 1px solid black;
 	}
 }
 
@@ -85,6 +90,7 @@ h1 {
 	.tabContent {
 		border-radius: 0 0 5px 5px;
 		display: none;
+		padding: 15px;
 	}
 
 	.active {
