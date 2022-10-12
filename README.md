@@ -13,6 +13,8 @@
 ## Практика JS
 
 - [x] Accordion
+  - [ ] Accordion's with Classes
+  - [ ] Accordion with CheckBox
 - [x] Tabs
 - [ ] Burger
 - [ ] Pagination
