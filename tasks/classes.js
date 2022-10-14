@@ -3,7 +3,7 @@ export class Accordion {
     this.heading = heading
   }
 
-  showOne() {
+  showOne(clear) {
     const accordionHeading = document.querySelectorAll(this.heading)
 
     accordionHeading.forEach((item) => {
@@ -33,6 +33,20 @@ export class Accordion {
           item.classList.add('active'),
           item.nextElementSibling.style.display = 'block'
         )
+      })
+    })
+  }
+
+  closeButton(clear) {
+    const accordionHeading = document.querySelectorAll(this.heading)
+    const closeButton = document.querySelector(clear)
+
+    closeButton.addEventListener('click', () => {
+      accordionHeading.forEach(element => {
+        element.classList.contains('active') ? (
+          element.classList.remove('active'),
+          element.nextElementSibling.style.display = 'none'
+        ) : null
       })
     })
   }

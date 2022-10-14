@@ -3,7 +3,9 @@ import { Accordion } from "./classes.js";
 const accordionTop = new Accordion('.accBtn')
 const accordionBottom = new Accordion('.accBtn-bottom')
 accordionTop.showOne()
+accordionTop.closeButton('.closeTopAccordions')
 accordionBottom.showAll()
+accordionBottom.closeButton('.closeBottomAccordions')
 
 const domTabs = document.querySelector(".tabsExample")
 const domTabsButton = document.querySelectorAll(".tabLink")
