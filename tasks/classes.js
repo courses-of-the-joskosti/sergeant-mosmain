@@ -3,7 +3,7 @@ export class Accordion {
     this.heading = heading
   }
 
-  showOne(clear) {
+  showOne() {
     const accordionHeading = document.querySelectorAll(this.heading)
 
     accordionHeading.forEach((item) => {
