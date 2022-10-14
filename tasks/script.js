@@ -1,28 +1,9 @@
-const domAccordionExample = document.querySelector('.accordionExample')
-const domAccordionButtons = document.querySelectorAll('.accBtn')
+import { Accordion } from "./classes.js";
 
-domAccordionExample.addEventListener('click', (event) => {
-	let accordionContent = event.target.nextElementSibling
-
-	if (event.target.classList.contains('accBtn') && !event.target.classList.contains('active')) {
-
-		domAccordionButtons.forEach(element => {
-			element.classList.remove('active')
-			element.nextElementSibling.style.display = 'none'
-		})
-
-		event.target.classList.toggle('active')
-		
-		if (accordionContent.style.display === "block") {
-			accordionContent.style.display = "none"
-		} else {
-			accordionContent.style.display = "block"
-		}
-	} else if (event.target.classList.contains('active')) {
-		event.target.classList.remove('active')
-		event.target.nextElementSibling.style.display = "none"
-	}
-})
+const accordionTop = new Accordion('.accBtn')
+const accordionBottom = new Accordion('.accBtn-bottom')
+accordionTop.showOne()
+accordionBottom.showAll()
 
 const domTabs = document.querySelector(".tabsExample")
 const domTabsButton = document.querySelectorAll(".tabLink")
