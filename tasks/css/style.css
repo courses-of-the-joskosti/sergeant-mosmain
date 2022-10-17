@@ -6,7 +6,99 @@ h1 {
   color: #fff;
 }
 
-.accordionExample .accBtn, .accordionExample .accBtn-bottom {
+header {
+  display: flex;
+  justify-content: flex-end;
+  height: 50px;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+}
+header .menu-btn {
+  width: 30px;
+  height: 30px;
+  margin-right: 15px;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  cursor: pointer;
+}
+header .menu-btn span {
+  width: 30px;
+  height: 2px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  transition: all 0.5s;
+}
+header .menu-btn span:nth-of-type(2) {
+  top: calc(50% - 10px);
+}
+header .menu-btn span:nth-of-type(3) {
+  top: calc(50% + 10px);
+}
+header .menu-btn.active span:nth-of-type(1) {
+  display: none;
+}
+header .menu-btn.active span:nth-of-type(2) {
+  top: 50%;
+  transform: translate(-50%, 0%) rotate(45deg);
+}
+header .menu-btn.active span:nth-of-type(3) {
+  top: 50%;
+  transform: translate(-50%, 0%) rotate(-45deg);
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+  background: #1b1b1b;
+  transform: translateX(100%);
+  transition: transform 0.5s;
+}
+.menu li {
+  list-style-type: none;
+}
+.menu.active {
+  transform: translateX(0);
+}
+.menu nav {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.menu nav ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 50%;
+  padding: 0;
+  margin: 0;
+}
+.menu nav ul li {
+  text-align: center;
+}
+.menu nav ul li a {
+  font-size: 2rem;
+  text-decoration: none;
+  color: #fff;
+}
+.menu nav ul li a:hover {
+  color: #000;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.accordionExample .accBtn,
+.accordionExample .accBtn-bottom {
   background-color: #888;
   color: #fff;
   padding: 18px;
@@ -18,7 +110,8 @@ h1 {
   border-radius: 5px;
   margin-top: 1em;
 }
-.accordionExample .accBtn:hover, .accordionExample .accBtn-bottom:hover {
+.accordionExample .accBtn:hover,
+.accordionExample .accBtn-bottom:hover {
   background-color: #ccc;
   color: #000;
 }
@@ -39,16 +132,23 @@ h1 {
   border-bottom: 1px solid black;
 }
 
-.tabsExample, .tabsExample-bottom {
+.tabsExample,
+.tabsExample-bottom {
   background-color: #888;
   border-radius: 5px;
 }
-.tabsExample .tabButtons, .tabsExample .tabButtons-bottom, .tabsExample-bottom .tabButtons, .tabsExample-bottom .tabButtons-bottom {
+.tabsExample .tabButtons,
+.tabsExample .tabButtons-bottom,
+.tabsExample-bottom .tabButtons,
+.tabsExample-bottom .tabButtons-bottom {
   padding: 0;
   display: flex;
   justify-content: space-evenly;
 }
-.tabsExample .tabLink, .tabsExample .tabLink-bottom, .tabsExample-bottom .tabLink, .tabsExample-bottom .tabLink-bottom {
+.tabsExample .tabLink,
+.tabsExample .tabLink-bottom,
+.tabsExample-bottom .tabLink,
+.tabsExample-bottom .tabLink-bottom {
   padding: 0;
   width: 100%;
   height: 50px;
@@ -58,22 +158,35 @@ h1 {
   color: #fff;
   transition: 0.4s;
 }
-.tabsExample .tabLink:first-child, .tabsExample .tabLink-bottom:first-child, .tabsExample-bottom .tabLink:first-child, .tabsExample-bottom .tabLink-bottom:first-child {
+.tabsExample .tabLink:first-child,
+.tabsExample .tabLink-bottom:first-child,
+.tabsExample-bottom .tabLink:first-child,
+.tabsExample-bottom .tabLink-bottom:first-child {
   border-radius: 5px 0 0 0;
 }
-.tabsExample .tabLink:last-child, .tabsExample .tabLink-bottom:last-child, .tabsExample-bottom .tabLink:last-child, .tabsExample-bottom .tabLink-bottom:last-child {
+.tabsExample .tabLink:last-child,
+.tabsExample .tabLink-bottom:last-child,
+.tabsExample-bottom .tabLink:last-child,
+.tabsExample-bottom .tabLink-bottom:last-child {
   border-radius: 0 5px 0 0;
 }
-.tabsExample .tabLink:hover, .tabsExample .tabLink-bottom:hover, .tabsExample-bottom .tabLink:hover, .tabsExample-bottom .tabLink-bottom:hover {
+.tabsExample .tabLink:hover,
+.tabsExample .tabLink-bottom:hover,
+.tabsExample-bottom .tabLink:hover,
+.tabsExample-bottom .tabLink-bottom:hover {
   background: #ccc;
   color: #000;
 }
-.tabsExample .tabContent, .tabsExample .tabContent-bottom, .tabsExample-bottom .tabContent, .tabsExample-bottom .tabContent-bottom {
+.tabsExample .tabContent,
+.tabsExample .tabContent-bottom,
+.tabsExample-bottom .tabContent,
+.tabsExample-bottom .tabContent-bottom {
   border-radius: 0 0 5px 5px;
   display: none;
   padding: 15px;
 }
-.tabsExample .active, .tabsExample-bottom .active {
+.tabsExample .active,
+.tabsExample-bottom .active {
   background-color: #fff !important;
   color: #000;
   display: block;
