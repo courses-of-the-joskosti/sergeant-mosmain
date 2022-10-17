@@ -16,7 +16,7 @@
   - [x] Accordion's with Classes
 - [x] Tabs
   - [x] Tabs with Classes
-- [ ] Burger
+- [x] Burger
 - [ ] Pagination
 - [ ] Carousel
 - [ ] Live search

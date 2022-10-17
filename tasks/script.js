@@ -18,7 +18,7 @@ tabsTop.show()
 
 tabsBottom.show()
 
-// burger
+// burger button and menu
 const menuBtn = document.querySelector('.menu-btn')
 const menu = document.querySelector('.menu')
 const menuLink = document.querySelector('.menu-links')
