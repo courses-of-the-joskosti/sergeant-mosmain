@@ -15,7 +15,7 @@
 - [x] Accordion
   - [x] Accordion's with Classes
 - [x] Tabs
-  - [ ] Tabs with Classes
+  - [x] Tabs with Classes
 - [ ] Burger
 - [ ] Pagination
 - [ ] Carousel

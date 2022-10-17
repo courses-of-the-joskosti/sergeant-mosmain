@@ -39,16 +39,16 @@ h1 {
   border-bottom: 1px solid black;
 }
 
-.tabsExample {
+.tabsExample, .tabsExample-bottom {
   background-color: #888;
   border-radius: 5px;
 }
-.tabsExample .tabButtons {
+.tabsExample .tabButtons, .tabsExample .tabButtons-bottom, .tabsExample-bottom .tabButtons, .tabsExample-bottom .tabButtons-bottom {
   padding: 0;
   display: flex;
   justify-content: space-evenly;
 }
-.tabsExample .tabLink {
+.tabsExample .tabLink, .tabsExample .tabLink-bottom, .tabsExample-bottom .tabLink, .tabsExample-bottom .tabLink-bottom {
   padding: 0;
   width: 100%;
   height: 50px;
@@ -58,22 +58,22 @@ h1 {
   color: #fff;
   transition: 0.4s;
 }
-.tabsExample .tabLink:first-child {
+.tabsExample .tabLink:first-child, .tabsExample .tabLink-bottom:first-child, .tabsExample-bottom .tabLink:first-child, .tabsExample-bottom .tabLink-bottom:first-child {
   border-radius: 5px 0 0 0;
 }
-.tabsExample .tabLink:last-child {
+.tabsExample .tabLink:last-child, .tabsExample .tabLink-bottom:last-child, .tabsExample-bottom .tabLink:last-child, .tabsExample-bottom .tabLink-bottom:last-child {
   border-radius: 0 5px 0 0;
 }
-.tabsExample .tabLink:hover {
+.tabsExample .tabLink:hover, .tabsExample .tabLink-bottom:hover, .tabsExample-bottom .tabLink:hover, .tabsExample-bottom .tabLink-bottom:hover {
   background: #ccc;
   color: #000;
 }
-.tabsExample .tabContent {
+.tabsExample .tabContent, .tabsExample .tabContent-bottom, .tabsExample-bottom .tabContent, .tabsExample-bottom .tabContent-bottom {
   border-radius: 0 0 5px 5px;
   display: none;
   padding: 15px;
 }
-.tabsExample .active {
+.tabsExample .active, .tabsExample-bottom .active {
   background-color: #fff !important;
   color: #000;
   display: block;

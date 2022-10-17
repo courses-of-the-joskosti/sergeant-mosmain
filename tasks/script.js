@@ -1,4 +1,4 @@
-import { Accordion } from "./classes.js";
+import { Accordion, Tab } from "./classes.js";
 
 const accordionTop = new Accordion('.accBtn')
 const accordionBottom = new Accordion('.accBtn-bottom')
@@ -9,23 +9,29 @@ accordionTop.closeButton('.closeTopAccordions')
 accordionBottom.showAll()
 accordionBottom.closeButton('.closeBottomAccordions')
 
-const domTabs = document.querySelector(".tabsExample")
-const domTabsButton = document.querySelectorAll(".tabLink")
-const domTabsContent = document.querySelectorAll(".tabContent")
+const tabsTop = new Tab('.tabsExample', '.tabLink', '.tabContent')
+const tabsBottom = new Tab('.tabsExample-bottom', '.tabLink-bottom', '.tabContent-bottom')
+
+tabsTop.show()
+
+tabsBottom.show()
+
+const domTabs = document.querySelector('.tabsExample')
+const domTabsButton = document.querySelectorAll('.tabLink')
+const domTabsContent = document.querySelectorAll('.tabContent')
 
 domTabs.addEventListener('click', (event) => {
 	const id = event.target.dataset.id
 	if (id) {
 		domTabsButton.forEach(btn => {
-			btn.classList.remove("active")
+			btn.classList.remove('active')
 		})
-		event.target.classList.add("active")
+		event.target.classList.add('active')
 
 		domTabsContent.forEach(content => {
-			content.classList.remove("active")
+			content.classList.remove('active')
 		})
-		const element = document.getElementById(id)
-		element.classList.add("active")
+		document.getElementById(id).classList.add('active')
 	}
 })
 

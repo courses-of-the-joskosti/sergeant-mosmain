@@ -51,3 +51,32 @@ export class Accordion {
     })
   }
 }
+
+export class Tab {
+  constructor (tabs, button, content) {
+    this.tabs = tabs
+    this.button = button
+    this.content = content
+  }
+
+  show() {
+    const domTabs = document.querySelector(this.tabs)
+    const domTabsButton = document.querySelectorAll(this.button)
+    const domTabsContent = document.querySelectorAll(this.content)
+
+    domTabs.addEventListener('click', (event) => {
+      const id = event.target.dataset.id
+      if (id) {
+        domTabsButton.forEach(btn => {
+          btn.classList.remove('active')
+        })
+        event.target.classList.add('active')
+    
+        domTabsContent.forEach(content => {
+          content.classList.remove('active')
+        })
+        document.getElementById(id).classList.add('active')
+      }
+    })
+  }
+}
