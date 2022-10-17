@@ -13,9 +13,9 @@
 ## Практика JS
 
 - [x] Accordion
-  - [ ] Accordion's with Classes
-  - [ ] Accordion with CheckBox
+  - [x] Accordion's with Classes
 - [x] Tabs
+  - [ ] Tabs with Classes
 - [ ] Burger
 - [ ] Pagination
 - [ ] Carousel

@@ -2,8 +2,10 @@ import { Accordion } from "./classes.js";
 
 const accordionTop = new Accordion('.accBtn')
 const accordionBottom = new Accordion('.accBtn-bottom')
+
 accordionTop.showOne()
 accordionTop.closeButton('.closeTopAccordions')
+
 accordionBottom.showAll()
 accordionBottom.closeButton('.closeBottomAccordions')
 
@@ -41,7 +43,6 @@ async function main() {
 
 	displayList(gitData, rows, currentPage)
 	displayPagination(gitData, rows)
-
 }
 
 function displayList(arrData, rowPerPage, page) {
