@@ -25,7 +25,7 @@ header .menu-btn {
   cursor: pointer;
 }
 header .menu-btn span {
-  width: 30px;
+  width: 2em;
   height: 2px;
   position: absolute;
   top: 50%;
@@ -36,7 +36,7 @@ header .menu-btn span {
 }
 header .menu-btn span:before {
   content: "";
-  width: 30px;
+  width: 2em;
   height: 2px;
   position: absolute;
   top: calc(50% - 10px);
@@ -47,7 +47,7 @@ header .menu-btn span:before {
 }
 header .menu-btn span:after {
   content: "";
-  width: 30px;
+  width: 2em;
   height: 2px;
   position: absolute;
   top: calc(50% + 10px);
@@ -57,18 +57,17 @@ header .menu-btn span:after {
   transition: all 0.5s;
 }
 header .menu-btn.active span {
-  width: 0;
-  height: 0;
+  transform: translate(-50%, 0%) rotate(45deg);
 }
 header .menu-btn.active span:before {
   content: "";
-  top: 50%;
-  transform: translate(-50%, 0%) rotate(45deg);
+  top: 0;
+  transform: translate(-50%, 0%) rotate(90deg);
 }
 header .menu-btn.active span:after {
   content: "";
-  top: 50%;
-  transform: translate(-50%, 0%) rotate(-45deg);
+  top: 0;
+  transform: translate(-50%, 0%) rotate(-90deg);
 }
 
 .menu {

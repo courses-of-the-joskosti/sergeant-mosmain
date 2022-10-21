@@ -32,7 +32,7 @@ header {
 		cursor: pointer;
 
 		span {
-			width: 30px;
+			width: 2em;
 			height: 2px;
 			position: absolute;
 			top: 50%;
@@ -43,7 +43,7 @@ header {
 
 			&:before {
 				content: '';
-				width: 30px;
+				width: 2em;
 				height: 2px;
 				position: absolute;
 				top: calc(50% - 10px);
@@ -55,7 +55,7 @@ header {
 
 			&:after {
 				content: '';
-				width: 30px;
+				width: 2em;
 				height: 2px;
 				position: absolute;
 				top: calc(50% + 10px);
@@ -68,19 +68,18 @@ header {
 
 		&.active {
 			span {
-				width: 0;
-				height: 0;
+				transform: translate(-50%, 0%) rotate(45deg);
 
 				&:before {
 					content: '';
-					top: 50%;
-					transform: translate(-50%, 0%) rotate(45deg);
+					top: 0;
+					transform: translate(-50%, 0%) rotate(90deg);
 				}
 
 				&:after {
 					content: '';
-					top: 50%;
-					transform: translate(-50%, 0%) rotate(-45deg);
+					top: 0;
+					transform: translate(-50%, 0%) rotate(-90deg);
 				}
 			}
 		}
