@@ -34,20 +34,39 @@ header .menu-btn span {
   background-color: #fff;
   transition: all 0.5s;
 }
-header .menu-btn span:nth-of-type(2) {
+header .menu-btn span:before {
+  content: "";
+  width: 30px;
+  height: 2px;
+  position: absolute;
   top: calc(50% - 10px);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  transition: all 0.5s;
 }
-header .menu-btn span:nth-of-type(3) {
+header .menu-btn span:after {
+  content: "";
+  width: 30px;
+  height: 2px;
+  position: absolute;
   top: calc(50% + 10px);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  transition: all 0.5s;
 }
-header .menu-btn.active span:nth-of-type(1) {
-  display: none;
+header .menu-btn.active span {
+  width: 0;
+  height: 0;
 }
-header .menu-btn.active span:nth-of-type(2) {
+header .menu-btn.active span:before {
+  content: "";
   top: 50%;
   transform: translate(-50%, 0%) rotate(45deg);
 }
-header .menu-btn.active span:nth-of-type(3) {
+header .menu-btn.active span:after {
+  content: "";
   top: 50%;
   transform: translate(-50%, 0%) rotate(-45deg);
 }
