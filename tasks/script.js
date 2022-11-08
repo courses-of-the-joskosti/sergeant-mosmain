@@ -100,3 +100,23 @@ menuLink.addEventListener('click', (event) => {
 
 // 	return liEl
 // }
+
+const productContainers = document.querySelectorAll('.product-container')
+const nxtBtn = document.querySelectorAll('.nxt-btn')
+const preBtn = document.querySelectorAll('.pre-btn')
+
+productContainers.forEach((item, i) => {
+    console.log(item.firstElementChild)
+    let containerDimensions = item.firstElementChild.getBoundingClientRect()
+    let containerWidth = containerDimensions.width
+	console.log(containerDimensions)
+	console.log(containerWidth)
+
+    nxtBtn[i].addEventListener('click', () => { 
+        item.scrollLeft += containerWidth
+    })
+
+    preBtn[i].addEventListener('click', () => {
+        item.scrollLeft -= containerWidth
+    })
+})

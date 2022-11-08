@@ -208,4 +208,120 @@ header .menu-btn.active span:after {
   background-color: #fff !important;
   color: #000;
   display: block;
+}
+
+.product {
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+}
+.product .product-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+.product .product-container::-webkit-scrollbar {
+  display: none;
+}
+.product .product-container .product-card {
+  flex: 0 0 auto;
+  width: 290px;
+  height: 450px;
+  padding: 0 20px;
+}
+.product .product-container .product-card:hover .card-btn {
+  opacity: 1;
+}
+.product .product-container .product-card:first-child {
+  padding-left: 0;
+}
+.product .product-container .product-card:last-child {
+  padding-right: 0;
+}
+.product .product-container .product-card .product-image {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  overflow: hidden;
+}
+.product .product-container .product-card .product-image .discount-tag {
+  position: absolute;
+  background: #fff;
+  padding: 5px;
+  border-radius: 0 0 5px 5px;
+  color: #ff7d7d;
+  right: 10px;
+  text-transform: capitalize;
+}
+.product .product-container .product-card .product-image .product-thumb {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.product .product-container .product-card .product-image .card-btn {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px;
+  width: 90%;
+  text-transform: capitalize;
+  border: none;
+  outline: none;
+  background: #fff;
+  border-radius: 5px;
+  transition: 0.5s;
+  cursor: pointer;
+  opacity: 0;
+}
+.product .product-container .product-card .product-image .card-btn:hover {
+  background: #ff7d7d;
+  color: #fff;
+}
+.product .product-container .product-card .product-info {
+  width: 100%;
+  height: 100px;
+  color: #fff;
+}
+.product .product-container .product-card .product-info .product-brand {
+  text-transform: uppercase;
+}
+.product .product-container .product-card .product-info .product-short-description {
+  width: 100%;
+  height: 20px;
+  line-height: 20px;
+  overflow: hidden;
+  opacity: 0.5;
+  text-transform: capitalize;
+  margin: 5px 0;
+}
+.product .product-container .product-card .product-info .price {
+  font-weight: 900;
+  font-size: 20px;
+}
+.product .product-container .product-card .product-info .actual-price {
+  margin-left: 20px;
+  opacity: 0.5;
+  text-decoration: line-through;
+}
+.product .buttons-slider .pre-btn,
+.product .buttons-slider .nxt-btn {
+  border: none;
+  width: 49%;
+  height: 6vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #888;
+  cursor: pointer;
+  z-index: 8;
+  color: #fff;
+  font-size: 2em;
+}
+.product .buttons-slider .pre-btn {
+  left: 0;
+}
+.product .buttons-slider .nxt-btn {
+  right: 0;
 }/*# sourceMappingURL=style.css.map */
