@@ -18,6 +18,7 @@
   - [x] Tabs with Classes
 - [x] Burger
 - [ ] Pagination
-- [ ] Carousel
+- [x] Carousel
+  - [ ] make touch inf carousel
 - [ ] Live search
 - [ ] Popup
