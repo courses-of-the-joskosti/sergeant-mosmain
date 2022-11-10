@@ -19,6 +19,6 @@
 - [x] Burger
 - [ ] Pagination
 - [x] Carousel
-  - [ ] make touch inf carousel
+  - [x] make touch inf carousel
 - [ ] Live search
 - [ ] Popup
