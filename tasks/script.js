@@ -1,5 +1,7 @@
 import { Accordion, Tab } from "./classes.js";
 
+let root = document.getElementsByTagName('html')[0]
+
 // accordions
 const accordionTop = new Accordion('.accBtn')
 const accordionBottom = new Accordion('.accBtn-bottom')
@@ -26,12 +28,15 @@ const menuLink = document.querySelector('.menu-links')
 menuBtn.addEventListener('click', () => {
   menuBtn.classList.toggle('active')
   menu.classList.toggle('active')
+  root.classList.toggle('overflow-hidden')
+
 })
 
 menuLink.addEventListener('click', (event) => {
   if (event.target.matches('li a')) {
     menuBtn.classList.remove('active')
     menu.classList.remove('active')
+    root.classList.remove('overflow-hidden')
   }
 })
 
