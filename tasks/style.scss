@@ -5,368 +5,474 @@ $color-block: #888;
 $color-block-active: #ccc;
 
 body {
-	background-color: $color-black;
+  background-color: $color-black;
 }
 
 h1 {
-	color: $color-white;
+  color: $color-white;
 }
 
 // burger
 header {
-	display: flex;
-	justify-content: flex-end;
-	height: 50px;
-	align-items: center;
-	position: fixed;
-	width: 100%;
-	z-index: 1;
+  display: flex;
+  justify-content: flex-end;
+  height: 50px;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
 
-	.menu-btn {
-		width: 30px;
-		height: 30px;
-		margin-right: 15px;
-		position: relative;
-		z-index: 2;
-		overflow: hidden;
-		cursor: pointer;
+  .menu-btn {
+    width: 30px;
+    height: 30px;
+    margin-right: 15px;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    cursor: pointer;
 
-		span {
-			width: 2em;
-			height: 2px;
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			background-color: $color-white;
-			transition: all 0.5s;
+    span {
+      width: 2em;
+      height: 2px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: $color-white;
+      transition: all 0.5s;
 
-			&:before {
-				content: '';
-				width: 2em;
-				height: 2px;
-				position: absolute;
-				top: calc(50% - 10px);
-				left: 50%;
-				transform: translate(-50%, -50%);
-				background-color: $color-white;
-				transition: all 0.5s;
-			}
+      &:before {
+        content: '';
+        width: 2em;
+        height: 2px;
+        position: absolute;
+        top: calc(50% - 10px);
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: $color-white;
+        transition: all 0.5s;
+      }
 
-			&:after {
-				content: '';
-				width: 2em;
-				height: 2px;
-				position: absolute;
-				top: calc(50% + 10px);
-				left: 50%;
-				transform: translate(-50%, -50%);
-				background-color: $color-white;
-				transition: all 0.5s;
-			}
-		}
+      &:after {
+        content: '';
+        width: 2em;
+        height: 2px;
+        position: absolute;
+        top: calc(50% + 10px);
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: $color-white;
+        transition: all 0.5s;
+      }
+    }
 
-		&.active {
-			span {
-				transform: translate(-50%, 0%) rotate(45deg);
+    &.active {
+      span {
+        transform: translate(-50%, 0%) rotate(45deg);
 
-				&:before {
-					content: '';
-					top: 0;
-					transform: translate(-50%, 0%) rotate(90deg);
-				}
+        &:before {
+          content: '';
+          top: 0;
+          transform: translate(-50%, 0%) rotate(90deg);
+        }
 
-				&:after {
-					content: '';
-					top: 0;
-					transform: translate(-50%, 0%) rotate(-90deg);
-				}
-			}
-		}
-	}
+        &:after {
+          content: '';
+          top: 0;
+          transform: translate(-50%, 0%) rotate(-90deg);
+        }
+      }
+    }
+  }
 }
 
 // burger menu
 .menu {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	padding: 15px;
-	background: $color-black;
-	transform: translateX(100%);
-	transition: transform 0.5s;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+  background: $color-black;
+  transform: translateX(100%);
+  transition: transform 0.5s;
 
-	li {
-		list-style-type: none;
-	}
+  li {
+    list-style-type: none;
+  }
 
-	&.active {
-		transform: translateX(0);
-	}
+  &.active {
+    transform: translateX(0);
+  }
 
-	nav {
-		display: flex;
-		height: 100%;
-		justify-content: center;
-		align-items: center;
+  nav {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
 
-		ul {
-			display: flex;
-			flex-direction: column;
-			justify-content: space-around;
-			height: 50%;
-			padding: 0;
-			margin: 0;
+    ul {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      height: 50%;
+      padding: 0;
+      margin: 0;
 
-			li {
-				text-align: center;
+      li {
+        text-align: center;
 
-				a {
-					font-size: 2rem;
-					text-decoration: none;
-					color: $color-white;
+        a {
+          font-size: 2rem;
+          text-decoration: none;
+          color: $color-white;
 
-					&:hover {
-						color: $color-black-text;
-						background-color: $color-white;
-						border-radius: 5px;
-					}
-				}
-			}
-		}
-	}
+          &:hover {
+            color: $color-black-text;
+            background-color: $color-white;
+            border-radius: 5px;
+          }
+        }
+      }
+    }
+  }
 }
 
 // accordion
 .accordionExample {
 
-	.accBtn,
-	.accBtn-bottom {
-		background-color: $color-block;
-		color: $color-white;
-		padding: 18px;
-		width: 100%;
-		text-align: left;
-		border: none;
-		outline: none;
-		transition: 0.4s;
-		border-radius: 5px;
-		margin-top: 1em;
+  .accBtn,
+  .accBtn-bottom {
+    background-color: $color-block;
+    color: $color-white;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    border-radius: 5px;
+    margin-top: 1em;
 
-		&:hover {
-			background-color: $color-block-active;
-			color: $color-black-text;
-		}
-	}
+    &:hover {
+      background-color: $color-block-active;
+      color: $color-black-text;
+    }
+  }
 
-	.acc-content {
-		padding: 0 18px;
-		background-color: $color-white;
-		overflow: hidden;
-		display: none;
-		border-radius: 0 0 5px 5px;
+  .acc-content {
+    padding: 0 18px;
+    background-color: $color-white;
+    overflow: hidden;
+    display: none;
+    border-radius: 0 0 5px 5px;
 
-		p {
-			margin: 18px 0;
-		}
-	}
+    p {
+      margin: 18px 0;
+    }
+  }
 
-	.active {
-		background-color: $color-white !important;
-		color: $color-black-text;
-		border-radius: 5px 5px 0 0;
-		border-bottom: 1px solid black;
-	}
+  .active {
+    background-color: $color-white !important;
+    color: $color-black-text;
+    border-radius: 5px 5px 0 0;
+    border-bottom: 1px solid black;
+  }
 }
 
 // tabs
 .tabsExample,
 .tabsExample-bottom {
-	background-color: $color-block;
-	border-radius: 5px;
+  background-color: $color-block;
+  border-radius: 5px;
 
-	.tabButtons,
-	.tabButtons-bottom {
-		padding: 0;
-		display: flex;
-		justify-content: space-evenly;
-	}
+  .tabButtons,
+  .tabButtons-bottom {
+    padding: 0;
+    display: flex;
+    justify-content: space-evenly;
+  }
 
-	.tabLink,
-	.tabLink-bottom {
-		padding: 0;
-		width: 100%;
-		height: 50px;
-		background-color: $color-block;
-		border: none;
-		outline: none;
-		color: $color-white;
-		transition: 0.4s;
+  .tabLink,
+  .tabLink-bottom {
+    padding: 0;
+    width: 100%;
+    height: 50px;
+    background-color: $color-block;
+    border: none;
+    outline: none;
+    color: $color-white;
+    transition: 0.4s;
 
-		&:first-child {
-			border-radius: 5px 0 0 0;
-		}
+    &:first-child {
+      border-radius: 5px 0 0 0;
+    }
 
-		&:last-child {
-			border-radius: 0 5px 0 0;
-		}
+    &:last-child {
+      border-radius: 0 5px 0 0;
+    }
 
-		&:hover {
-			background: $color-block-active;
-			color: $color-black-text;
-		}
-	}
+    &:hover {
+      background: $color-block-active;
+      color: $color-black-text;
+    }
+  }
 
-	.tabContent,
-	.tabContent-bottom {
-		border-radius: 0 0 5px 5px;
-		display: none;
-		padding: 15px;
-	}
+  .tabContent,
+  .tabContent-bottom {
+    border-radius: 0 0 5px 5px;
+    display: none;
+    padding: 15px;
+  }
 
-	.active {
-		background-color: $color-white !important;
-		color: $color-black-text;
-		display: block;
-	}
+  .active {
+    background-color: $color-white !important;
+    color: $color-black-text;
+    display: block;
+  }
 }
 
 // card slider
 .product {
-	position: relative;
-	overflow: hidden;
-	padding: 20px;
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
 
-	.product-container {
-		display: flex;
-		overflow-x: auto;
-		scroll-behavior: smooth;
-		
-		&::-webkit-scrollbar {
-			display: none;
-		}
+  .product-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
 
-		.product-card {
-			flex: 0 0 auto;
-			width: 290px;
-			height: 450px;
-			padding: 0 20px;
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
-			&:hover .card-btn {
-				opacity: 1;
-			}
-		
-			&:first-child {
-				padding-left: 0;
-			}
-		
-			&:last-child {
-				padding-right: 0;
-			}
+    .product-card {
+      flex: 0 0 auto;
+      width: 290px;
+      height: 450px;
+      padding: 0 20px;
 
-			.product-image {
-				position: relative;
-				width: 100%;
-				height: 350px;
-				overflow: hidden;
+      &:hover .card-btn {
+        opacity: 1;
+      }
 
-				.discount-tag {
-					position: absolute;
-					background: $color-white;
-					padding: 5px;
-					border-radius: 0 0 5px 5px;
-					color: #ff7d7d;
-					right: 10px;
-					text-transform: capitalize;
-				}
+      &:first-child {
+        padding-left: 0;
+      }
 
-				.product-thumb {
-					width: 100%;
-					height: 100%;
-					object-fit: cover;
-				}
+      &:last-child {
+        padding-right: 0;
+      }
 
-				.card-btn {
-					position: absolute;
-					bottom: 10px;
-					left: 50%;
-					transform: translateX(-50%);
-					padding: 10px;
-					width: 90%;
-					text-transform: capitalize;
-					border: none;
-					outline: none;
-					background: $color-white;
-					border-radius: 5px;
-					transition: 0.5s;
-					cursor: pointer;
-					opacity: 0;
+      .product-image {
+        position: relative;
+        width: 100%;
+        height: 350px;
+        overflow: hidden;
 
-					&:hover {
-						background: #ff7d7d;
-						color: $color-white;
-					}
-				}
-			}
+        .discount-tag {
+          position: absolute;
+          background: $color-white;
+          padding: 5px;
+          border-radius: 0 0 5px 5px;
+          color: #ff7d7d;
+          right: 10px;
+          text-transform: capitalize;
+        }
 
-			.product-info {
-				width: 100%;
-				height: 100px;
-				color: $color-white;
+        .product-thumb {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
 
-				.product-brand {
-					text-transform: uppercase;
-				}
+        .card-btn {
+          position: absolute;
+          bottom: 10px;
+          left: 50%;
+          transform: translateX(-50%);
+          padding: 10px;
+          width: 90%;
+          text-transform: capitalize;
+          border: none;
+          outline: none;
+          background: $color-white;
+          border-radius: 5px;
+          transition: 0.5s;
+          cursor: pointer;
+          opacity: 0;
 
-				.product-short-description {
-					width: 100%;
-					height: 20px;
-					line-height: 20px;
-					overflow: hidden;
-					opacity: 0.5;
-					text-transform: capitalize;
-					margin: 5px 0;
-				}
+          &:hover {
+            background: #ff7d7d;
+            color: $color-white;
+          }
+        }
+      }
 
-				.price {
-					font-weight: 900;
-					font-size: 20px;
-				}
+      .product-info {
+        width: 100%;
+        height: 100px;
+        color: $color-white;
 
-				.actual-price {
-					margin-left: 20px;
-					opacity: 0.5;
-					text-decoration: line-through;
-				}
-			}
-		}
-	}
+        .product-brand {
+          text-transform: uppercase;
+        }
 
-	.buttons-slider {
+        .product-short-description {
+          width: 100%;
+          height: 20px;
+          line-height: 20px;
+          overflow: hidden;
+          opacity: 0.5;
+          text-transform: capitalize;
+          margin: 5px 0;
+        }
 
-		.pre-btn,
-		.nxt-btn {
-			border: none;
-			width: 49%;
-			height: 6vh;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			background: $color-block;
-			cursor: pointer;
-			z-index: 8;
-			color: $color-white;
-			font-size: 2em;
-		}
+        .price {
+          font-weight: 900;
+          font-size: 20px;
+        }
 
-		.pre-btn {
-			left: 0;
-		}
+        .actual-price {
+          margin-left: 20px;
+          opacity: 0.5;
+          text-decoration: line-through;
+        }
+      }
+    }
+  }
 
-		.nxt-btn {
-			right: 0;
-		}
-	}
+  .buttons-slider {
+
+    .pre-btn,
+    .nxt-btn {
+      border: none;
+      width: 49%;
+      height: 6vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: $color-block;
+      cursor: pointer;
+      z-index: 8;
+      color: $color-white;
+      font-size: 2em;
+
+      &:active {
+        transform: scale(.95);
+      }
+    }
+
+    .pre-btn {
+      left: 0;
+    }
+
+    .nxt-btn {
+      right: 0;
+    }
+  }
+}
+
+$slider-width: 400px;
+$slider-height: 300px;
+
+.slider {
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: $slider-width;
+  height: $slider-height;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, .2);
+
+  .control {
+    position: absolute;
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    background: #fff;
+    border-radius: 50px;
+    margin-top: -20px;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+  }
+
+  .prev,
+  .next {
+    background-size: 22px;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+
+    &:active {
+      transform: scale(.8);
+    }
+  }
+
+  .prev {
+    background-image: url(https://cdn0.iconfinder.com/data/icons/navigation-set-arrows-part-one/32/ChevronLeft-512.png);
+    left: -20px;
+  }
+
+  .next {
+    background-image: url(https://cdn0.iconfinder.com/data/icons/navigation-set-arrows-part-one/32/ChevronRight-512.png);
+    right: -20px;
+  }
+
+  .wrapper {
+    overflow: hidden;
+    position: relative;
+    width: $slider-width;
+    height: $slider-height;
+    z-index: 1;
+
+    .slides.shifting {
+      transition: left .2s ease-out;
+    }
+
+    .slides {
+      display: flex;
+      position: relative;
+      top: 0;
+      left: -$slider-width;
+      width: 10000px;
+
+      .slide {
+        width: $slider-width;
+        height: $slider-height;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transition: all 1s;
+        position: relative;
+        background: #FFCF47;
+        border-radius: 2px;
+        font-size: 3rem;
+        text-align: center;
+        color: $color-white;
+        text-shadow: 3px 3px $color-block;
+      }
+    }
+  }
+}
+
+.slider.loaded {
+
+  .slide:nth-child(1),
+  .slide:nth-child(6) {
+    background: #7ADCEF
+  }
+
+  .slide:nth-child(3) {
+    background: #3CFF96
+  }
+
+  .slide:nth-child(4) {
+    background: #a78df5
+  }
+
+  .slide:nth-child(5) {
+    background: #ff8686
+  }
 }

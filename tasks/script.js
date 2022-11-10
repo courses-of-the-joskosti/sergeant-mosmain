@@ -24,15 +24,15 @@ const menu = document.querySelector('.menu')
 const menuLink = document.querySelector('.menu-links')
 
 menuBtn.addEventListener('click', () => {
-	menuBtn.classList.toggle('active')
-	menu.classList.toggle('active')
+  menuBtn.classList.toggle('active')
+  menu.classList.toggle('active')
 })
 
 menuLink.addEventListener('click', (event) => {
-	if (event.target.matches('li a')) {
-		menuBtn.classList.remove('active')
-		menu.classList.remove('active')
-	}
+  if (event.target.matches('li a')) {
+    menuBtn.classList.remove('active')
+    menu.classList.remove('active')
+  }
 })
 
 // main()
@@ -101,22 +101,89 @@ menuLink.addEventListener('click', (event) => {
 // 	return liEl
 // }
 
+
+// slider
 const productContainers = document.querySelectorAll('.product-container')
 const nxtBtn = document.querySelectorAll('.nxt-btn')
 const preBtn = document.querySelectorAll('.pre-btn')
 
 productContainers.forEach((item, i) => {
-    console.log(item.firstElementChild)
-    let containerDimensions = item.firstElementChild.getBoundingClientRect()
-    let containerWidth = containerDimensions.width
-	console.log(containerDimensions)
-	console.log(containerWidth)
+  console.log(item.firstElementChild)
+  let containerDimensions = item.firstElementChild.getBoundingClientRect()
+  let containerWidth = containerDimensions.width
+  console.log(containerDimensions)
+  console.log(containerWidth)
 
-    nxtBtn[i].addEventListener('click', () => { 
-        item.scrollLeft += containerWidth
-    })
+  nxtBtn[i].addEventListener('click', () => {
+    item.scrollLeft += containerWidth
+  })
 
-    preBtn[i].addEventListener('click', () => {
-        item.scrollLeft -= containerWidth
-    })
+  preBtn[i].addEventListener('click', () => {
+    item.scrollLeft -= containerWidth
+  })
 })
+
+// inf carousel
+let slider = document.getElementById('slider'),
+  sliderItems = document.getElementById('slides'),
+  prev = document.getElementById('prev'),
+  next = document.getElementById('next');
+
+function slide(wrapper, items, prev, next) {
+  let posInitial,
+    slides = items.getElementsByClassName('slide'),
+    slidesLength = slides.length,
+    slideSize = items.getElementsByClassName('slide')[0].offsetWidth,
+    firstSlide = slides[0],
+    lastSlide = slides[slidesLength - 1],
+    cloneFirst = firstSlide.cloneNode(true),
+    cloneLast = lastSlide.cloneNode(true),
+    index = 0,
+    allowShift = true
+
+  // Clone first and last slide
+  items.appendChild(cloneFirst)
+  items.insertBefore(cloneLast, firstSlide)
+  wrapper.classList.add('loaded')
+
+  // Click events
+  prev.addEventListener('click', () => shiftSlide(-1))
+  next.addEventListener('click', () => shiftSlide(1))
+
+  // Transition events
+  items.addEventListener('transitionend', checkIndex)
+
+  function shiftSlide(dir, action) {
+    items.classList.add('shifting')
+
+    if (allowShift) {
+      (!action) ? posInitial = items.offsetLeft : null;
+
+      (dir == 1) ? (
+        items.style.left = (posInitial - slideSize) + "px",
+        index++
+      ) : (dir == -1) ? (
+        items.style.left = (posInitial + slideSize) + "px",
+        index--
+      ) : null
+    }
+
+    allowShift = false
+  }
+
+  function checkIndex() {
+    items.classList.remove('shifting');
+
+    (index == -1) ? (
+      items.style.left = -(slidesLength * slideSize) + "px",
+      index = slidesLength - 1
+    ) : (index == slidesLength) ? (
+      items.style.left = -(1 * slideSize) + "px",
+      index = 0
+    ) : null
+
+    allowShift = true
+  }
+}
+
+slide(slider, sliderItems, prev, next)
