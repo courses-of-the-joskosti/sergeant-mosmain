@@ -104,11 +104,16 @@ header .menu-btn.active span:after {
 }
 .menu nav ul li {
   text-align: center;
+  margin-bottom: 1rem;
+}
+.menu nav ul li:last-child {
+  margin-bottom: 0;
 }
 .menu nav ul li a {
   font-size: 2rem;
   text-decoration: none;
   color: #fff;
+  padding: 5px;
 }
 .menu nav ul li a:hover {
   color: #000;
