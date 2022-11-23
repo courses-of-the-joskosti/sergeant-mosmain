@@ -242,3 +242,22 @@ function slide(wrapper, items, prev, next) {
 }
 
 slide(slider, sliderItems, prev, next)
+
+const popup = document.querySelector('.popup')
+const showPopup = document.querySelector('.show-popup')
+
+showPopup.addEventListener('click', () => {
+  popup.style.display = 'block'
+  root.classList.toggle('overflow-hidden')
+})
+
+popup.addEventListener('click', (e) => {
+  (
+  e.target.matches('.popup') || 
+  e.target.matches('.popup-close') ||
+  e.target.matches('.popup-btn-close')
+  ) ? (
+    popup.style.display = 'none',
+    root.classList.toggle('overflow-hidden')
+  ) : null
+})

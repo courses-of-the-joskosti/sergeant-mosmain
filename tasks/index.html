@@ -13,6 +13,22 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
+    <div class="popup">
+      <div class="popup-in">
+        <div class="popup-head">
+          <p class="popup-title">Pop-up title</p>
+          <p class="popup-close"></p>
+        </div>
+        <div class="popup-body">
+          <p>Pop-up body text goes here.</p>
+        </div>
+        <div class="popup-footer">
+          <button class="popup-btn-close">Close</button>
+          <button class="popup-btn-save">Save changes</button>
+        </div>
+      </div>
+    </div>
+
     <header>
       <div class="menu-btn">
         <span></span>
@@ -28,6 +44,7 @@
           <li><a href="#container-3">Tab's bottom</a></li>
           <li><a href="#container-4">Card slider</a></li>
           <li><a href="#container-5">Inf carousel</a></li>
+          <li><a href="#container-6">Pop-up</a></li>
         </ul>
       </nav>
     </div>
@@ -490,6 +507,16 @@
         <a id="prev" class="control prev"></a>
         <a id="next" class="control next"></a>
       </div>
+    </div>
+
+    <div class="container" id="container-6">
+      <h1>Simple pop-up</h1>
+      <button 
+        type="button" 
+        class="btn btn-secondary show-popup"
+        />
+        Show Pop-up
+      </button>
     </div>
     <script type="module" src="script.js"></script>
   </body>

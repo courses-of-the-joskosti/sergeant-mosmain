@@ -11,6 +11,148 @@ body {
 h1 {
   color: $color-white;
 }
+.active {
+  display: block;
+}
+// pop-up
+.popup {
+  display: none;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 50;
+
+  .popup-in {
+    color: #fff;
+    align-items: center;
+    display: flex;
+    margin: 4em auto;
+    max-width: 500px;
+    min-width: 50%;
+    flex-direction: column;
+    border-radius: 5px;
+    background-color: $color-black;
+    border: $color-block solid 1px;
+
+    .popup-head {
+      display: flex;
+      height: 10%;
+      width: 100%;
+      justify-content: space-between;
+      font-size: 1.5em;
+      padding: 0 25px;
+
+      .popup-title {
+        display: flex;
+        margin: 0;
+        align-items: center;
+        font-weight: bold;
+      }
+
+      .popup-close {
+        display: flex;
+        margin: 0;
+        align-items: center;
+        font-size: 2em;
+        cursor: pointer;
+        transition: .15s;
+
+        &:after {
+          content: "\00d7";
+        }
+
+        &:hover {
+          transition: all .15s ease-in;
+          opacity: 80%;
+        }
+
+        &:active {
+          opacity: 60%;
+        }
+      }
+    }
+
+    .popup-body {
+      display: flex;
+      height: 100%;
+      width: 100%;
+      font-size: 1.2em;
+      padding: 25px;
+      border-top: 1px solid $color-block;
+      border-bottom: 1px solid $color-block;
+    }
+
+    .popup-footer {
+      display: flex;
+      height: 10%;
+      width: 100%;
+      padding: 25px;
+      justify-content: end;
+
+      button {
+        border: 1px solid transparent;
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        border-radius: 5px;
+        margin: .25rem;
+        font-size: 1rem;
+        transition: .15s;
+      }
+
+      .popup-btn-close {
+        color: $color-white;
+        background-color: $color-block;
+
+        &:hover {
+          transition: all .15s ease-in;
+          opacity: 80%;
+        }
+
+        &:active {
+          opacity: 60%;
+        }
+      }
+
+      .popup-btn-save {
+        color: $color-black-text;
+        background-color: $color-white;
+
+        &:hover {
+          transition: all .15s ease-in;
+          opacity: 80%;
+        }
+
+        &:active {
+          opacity: 60%;
+        }
+      }
+    }
+  }
+}
+
+// .popup .popup-in .popup-body {
+//   height: 80%;
+//   width: 100%;
+//   }
+//   .popup .popup-in .popup-footer {
+//   height: 10%;
+//   width: 100%;
+//   }
+//   .popup .popup-in .popup-head {
+//   height: 10%;
+//   width: 100%;
+//   }
+//   .popup .popup-in {
+//   position: relative;
+//   }
+//   .popup {
+//   display: flex;
+//   position: absolute;
+//   justify-content: center;
+//   height: 100%;
+//   position: fixed;
+//   }
 
 // burger
 header {

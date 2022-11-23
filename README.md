@@ -21,4 +21,4 @@
 - [x] Carousel
   - [x] make touch inf carousel
 - [ ] Live search
-- [ ] Popup
+- [x] Popup
