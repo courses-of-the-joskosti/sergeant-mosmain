@@ -261,3 +261,36 @@ popup.addEventListener('click', (e) => {
     root.classList.toggle('overflow-hidden')
   ) : null
 })
+
+const listSearch = document.querySelector('.list-search')
+const listItems = document.querySelectorAll('.list li')
+
+listSearch.addEventListener('input', (e) => {
+  let searchValue = e.target.value, str
+  
+  searchValue ? (
+    listItems.forEach(item => {
+      let transformText = item.innerText.toLowerCase()
+
+      transformText.search(searchValue) == -1 ? 
+      (
+        item.hidden = true,
+        item.innerHTML = item.innerText
+      ) : (
+        item.hidden = false,
+        str = item.innerText,
+        item.innerHTML = insertMark(str, transformText.search(searchValue), searchValue.length)
+      ) 
+    })
+  ) : (
+    listItems.forEach(item => {
+      item.hidden = false
+      item.innerHTML = item.innerText
+    })
+  )
+})
+
+
+function insertMark(string, pos, len) {
+  return string.slice(0, pos) + '<mark>' + string.slice(pos, pos + len) + '</mark>' + string.slice(pos + len)
+}

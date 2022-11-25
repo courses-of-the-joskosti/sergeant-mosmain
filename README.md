@@ -20,5 +20,5 @@
 - [ ] Pagination
 - [x] Carousel
   - [x] make touch inf carousel
-- [ ] Live search
+- [x] Live search
 - [x] Popup
