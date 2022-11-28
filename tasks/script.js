@@ -176,6 +176,7 @@ function slide(wrapper, items, prev, next) {
 
 slide(slider, sliderItems, prev, next)
 
+// pop-up
 const popup = document.querySelector('.popup')
 const showPopup = document.querySelector('.show-popup')
 
@@ -222,7 +223,6 @@ listSearch.addEventListener('input', (e) => {
     })
   )
 })
-
 
 function insertMark(string, pos, len) {
   return string.slice(0, pos) + '<mark>' + string.slice(pos, pos + len) + '</mark>' + string.slice(pos + len)
