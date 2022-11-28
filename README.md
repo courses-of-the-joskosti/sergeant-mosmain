@@ -17,7 +17,7 @@
 - [x] Tabs
   - [x] Tabs with Classes
 - [x] Burger
-- [ ] Pagination
+- [x] Pagination
 - [x] Carousel
   - [x] make touch inf carousel
 - [x] Live search

@@ -228,3 +228,82 @@ listSearch.addEventListener('input', (e) => {
 function insertMark(string, pos, len) {
   return string.slice(0, pos) + '<mark>' + string.slice(pos, pos + len) + '</mark>' + string.slice(pos + len)
 }
+
+// paginations
+const itemsContainer = document.querySelector(".pagination-list")
+const items = document.querySelectorAll(".pagination-item")
+const nav = document.querySelector(".pagination-buttons")
+const buttons = document.querySelectorAll(".pagination-buttons")
+const nextBtn = document.querySelector(".next-page")
+const prevBtn = document.querySelector(".prev-page")
+
+const state = {
+  allItems: [...items],
+  maximumItems: 10,
+  initialPage: 1,
+  totalPages() {
+    return Math.ceil(state.allItems.length / state.maximumItems)
+  },
+  curPage: 1,
+}
+
+const getItems = (page) => {
+  state.allItems.forEach((item) => item.remove())
+  const min = (page - 1) * state.maximumItems
+  const max = page * state.maximumItems
+
+  return state.allItems.slice(min, max)
+}
+
+const renderItems = (page) => {
+  const items = getItems(page)
+  items.forEach((item) => itemsContainer.append(item))
+}
+
+renderItems(state.initialPage)
+
+const displayBtns = (page) => {
+  //only one page
+  (state.totalPages() === state.initialPage) ? (
+    buttons.forEach((btn) => btn.disabled = true)
+  ) : null;
+
+  //last page
+  (page === state.totalPages() && page !== state.initialPage) ? (
+    nextBtn.disabled = true,
+    prevBtn.disabled = false
+  ) : null;
+
+  //1st page
+  (page === state.initialPage && state.totalPages() > state.initialPage) ? (
+    nextBtn.disabled = false,
+    prevBtn.disabled = true
+  ) : null;
+
+  //not the 1st page and not the last one
+  (page !== state.initialPage && page < state.totalPages()) ? (
+    nextBtn.disabled = false,
+    prevBtn.disabled = false
+  ) : null
+}
+
+displayBtns(state.initialPage)
+
+const controlBtns = (e) => {
+  const pagesNb = state.totalPages();
+
+  (e.target.classList.contains("next-page") && state.initialPage !== pagesNb) ? (
+    state.curPage++,
+    renderItems(state.curPage)
+  ) : null;
+
+
+  (e.target.classList.contains("prev-page") && state.initialPage !== state.curPage) ? (
+    state.curPage--,
+    renderItems(state.curPage)
+  ) : null
+
+  displayBtns(state.curPage)
+}
+
+nav.addEventListener("click", controlBtns)
