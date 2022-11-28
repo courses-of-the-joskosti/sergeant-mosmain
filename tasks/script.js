@@ -196,6 +196,7 @@ popup.addEventListener('click', (e) => {
   ) : null
 })
 
+// search
 const listSearch = document.querySelector('.list-search')
 const listItems = document.querySelectorAll('.list li')
 
