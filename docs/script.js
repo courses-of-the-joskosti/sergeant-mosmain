@@ -1,4 +1,4 @@
-import { Accordion, Tab } from "./classes.js";
+import { Accordion, Tab } from './classes.js'
 
 let root = document.getElementsByTagName('html')[0]
 
@@ -14,7 +14,11 @@ accordionBottom.closeButton('.closeBottomAccordions')
 
 // tabs
 const tabsTop = new Tab('.tabsExample', '.tabLink', '.tabContent')
-const tabsBottom = new Tab('.tabsExample-bottom', '.tabLink-bottom', '.tabContent-bottom')
+const tabsBottom = new Tab(
+  '.tabsExample-bottom',
+  '.tabLink-bottom',
+  '.tabContent-bottom',
+)
 
 tabsTop.show()
 
@@ -29,7 +33,6 @@ menuBtn.addEventListener('click', () => {
   menuBtn.classList.toggle('active')
   menu.classList.toggle('active')
   root.classList.toggle('overflow-hidden')
-
 })
 
 menuLink.addEventListener('click', (event) => {
@@ -62,7 +65,7 @@ productContainers.forEach((item, i) => {
 let slider = document.getElementById('slider'),
   sliderItems = document.getElementById('slides'),
   prev = document.getElementById('prev'),
-  next = document.getElementById('next');
+  next = document.getElementById('next')
 
 function slide(wrapper, items, prev, next) {
   let posX1 = 0,
@@ -103,39 +106,33 @@ function slide(wrapper, items, prev, next) {
   function dragStart(e) {
     e = e || window.event
     e.preventDefault()
-    posInitial = items.offsetLeft;
+    posInitial = items.offsetLeft
 
-    (e.type == 'touchstart') ?
-      posX1 = e.touches[0].clientX :
-      (
-        posX1 = e.clientX,
-        document.onmouseup = dragEnd,
-        document.onmousemove = dragAction
-      )
+    e.type == 'touchstart'
+      ? (posX1 = e.touches[0].clientX)
+      : ((posX1 = e.clientX),
+        (document.onmouseup = dragEnd),
+        (document.onmousemove = dragAction))
   }
 
   function dragAction(e) {
-    e = e || window.event;
+    e = e || window.event
 
-    (e.type == 'touchmove') ? (
-      posX2 = posX1 - e.touches[0].clientX,
-      posX1 = e.touches[0].clientX
-    ) : (
-      posX2 = posX1 - e.clientX,
-      posX1 = e.clientX
-    )
+    e.type == 'touchmove'
+      ? ((posX2 = posX1 - e.touches[0].clientX), (posX1 = e.touches[0].clientX))
+      : ((posX2 = posX1 - e.clientX), (posX1 = e.clientX))
 
-    items.style.left = (items.offsetLeft - posX2) + "px"
+    items.style.left = items.offsetLeft - posX2 + 'px'
   }
 
   function dragEnd() {
-    posFinal = items.offsetLeft;
+    posFinal = items.offsetLeft
 
-    (posFinal - posInitial < -threshold) ?
-      shiftSlide(1, 'drag') :
-      (posFinal - posInitial > threshold) ?
-        shiftSlide(-1, 'drag') :
-        items.style.left = (posInitial) + "px"
+    posFinal - posInitial < -threshold
+      ? shiftSlide(1, 'drag')
+      : posFinal - posInitial > threshold
+      ? shiftSlide(-1, 'drag')
+      : (items.style.left = posInitial + 'px')
 
     document.onmouseup = null
     document.onmousemove = null
@@ -145,30 +142,27 @@ function slide(wrapper, items, prev, next) {
     items.classList.add('shifting')
 
     if (allowShift) {
-      (!action) ? posInitial = items.offsetLeft : null;
+      !action ? (posInitial = items.offsetLeft) : null
 
-      (dir == 1) ? (
-        items.style.left = (posInitial - slideSize) + "px",
-        index++
-      ) : (dir == -1) ? (
-        items.style.left = (posInitial + slideSize) + "px",
-        index--
-      ) : null
+      dir == 1
+        ? ((items.style.left = posInitial - slideSize + 'px'), index++)
+        : dir == -1
+        ? ((items.style.left = posInitial + slideSize + 'px'), index--)
+        : null
     }
 
     allowShift = false
   }
 
   function checkIndex() {
-    items.classList.remove('shifting');
+    items.classList.remove('shifting')
 
-    (index == -1) ? (
-      items.style.left = -(slidesLength * slideSize) + "px",
-      index = slidesLength - 1
-    ) : (index == slidesLength) ? (
-      items.style.left = -(1 * slideSize) + "px",
-      index = 0
-    ) : null
+    index == -1
+      ? ((items.style.left = -(slidesLength * slideSize) + 'px'),
+        (index = slidesLength - 1))
+      : index == slidesLength
+      ? ((items.style.left = -(1 * slideSize) + 'px'), (index = 0))
+      : null
 
     allowShift = true
   }
@@ -186,14 +180,11 @@ showPopup.addEventListener('click', () => {
 })
 
 popup.addEventListener('click', (e) => {
-  (
-  e.target.matches('.popup') || 
+  e.target.matches('.popup') ||
   e.target.matches('.popup-close') ||
   e.target.matches('.popup-btn-close')
-  ) ? (
-    popup.style.display = 'none',
-    root.classList.toggle('overflow-hidden')
-  ) : null
+    ? ((popup.style.display = 'none'), root.classList.toggle('overflow-hidden'))
+    : null
 })
 
 // search
@@ -201,41 +192,46 @@ const listSearch = document.querySelector('.list-search')
 const listItems = document.querySelectorAll('.list li')
 
 listSearch.addEventListener('input', (e) => {
-  let searchValue = e.target.value, str
-  
-  searchValue ? (
-    listItems.forEach(item => {
-      let transformText = item.innerText.toLowerCase()
+  let searchValue = e.target.value,
+    str
 
-      transformText.search(searchValue) == -1 ? 
-      (
-        item.hidden = true,
+  searchValue
+    ? listItems.forEach((item) => {
+        let transformText = item.innerText.toLowerCase()
+
+        transformText.search(searchValue) == -1
+          ? ((item.hidden = true), (item.innerHTML = item.innerText))
+          : ((item.hidden = false),
+            (str = item.innerText),
+            (item.innerHTML = insertMark(
+              str,
+              transformText.search(searchValue),
+              searchValue.length,
+            )))
+      })
+    : listItems.forEach((item) => {
+        item.hidden = false
         item.innerHTML = item.innerText
-      ) : (
-        item.hidden = false,
-        str = item.innerText,
-        item.innerHTML = insertMark(str, transformText.search(searchValue), searchValue.length)
-      ) 
-    })
-  ) : (
-    listItems.forEach(item => {
-      item.hidden = false
-      item.innerHTML = item.innerText
-    })
-  )
+      })
 })
 
 function insertMark(string, pos, len) {
-  return string.slice(0, pos) + '<mark>' + string.slice(pos, pos + len) + '</mark>' + string.slice(pos + len)
+  return (
+    string.slice(0, pos) +
+    '<mark>' +
+    string.slice(pos, pos + len) +
+    '</mark>' +
+    string.slice(pos + len)
+  )
 }
 
 // paginations
-const itemsContainer = document.querySelector(".pagination-list")
-const items = document.querySelectorAll(".pagination-item")
-const nav = document.querySelector(".pagination-buttons")
-const buttons = document.querySelectorAll(".pagination-buttons")
-const nextBtn = document.querySelector(".next-page")
-const prevBtn = document.querySelector(".prev-page")
+const itemsContainer = document.querySelector('.pagination-list')
+const items = document.querySelectorAll('.pagination-item')
+const nav = document.querySelector('.pagination-buttons')
+const buttons = document.querySelectorAll('.pagination-buttons')
+const nextBtn = document.querySelector('.next-page')
+const prevBtn = document.querySelector('.prev-page')
 
 const state = {
   allItems: [...items],
@@ -264,46 +260,41 @@ renderItems(state.initialPage)
 
 const displayBtns = (page) => {
   //only one page
-  (state.totalPages() === state.initialPage) ? (
-    buttons.forEach((btn) => btn.disabled = true)
-  ) : null;
+  state.totalPages() === state.initialPage
+    ? buttons.forEach((btn) => (btn.disabled = true))
+    : null
 
   //last page
-  (page === state.totalPages() && page !== state.initialPage) ? (
-    nextBtn.disabled = true,
-    prevBtn.disabled = false
-  ) : null;
+  page === state.totalPages() && page !== state.initialPage
+    ? ((nextBtn.disabled = true), (prevBtn.disabled = false))
+    : null
 
   //1st page
-  (page === state.initialPage && state.totalPages() > state.initialPage) ? (
-    nextBtn.disabled = false,
-    prevBtn.disabled = true
-  ) : null;
+  page === state.initialPage && state.totalPages() > state.initialPage
+    ? ((nextBtn.disabled = false), (prevBtn.disabled = true))
+    : null
 
   //not the 1st page and not the last one
-  (page !== state.initialPage && page < state.totalPages()) ? (
-    nextBtn.disabled = false,
-    prevBtn.disabled = false
-  ) : null
+  page !== state.initialPage && page < state.totalPages()
+    ? ((nextBtn.disabled = false), (prevBtn.disabled = false))
+    : null
 }
 
 displayBtns(state.initialPage)
 
 const controlBtns = (e) => {
-  const pagesNb = state.totalPages();
+  const pagesNb = state.totalPages()
 
-  (e.target.classList.contains("next-page") && state.initialPage !== pagesNb) ? (
-    state.curPage++,
-    renderItems(state.curPage)
-  ) : null;
+  e.target.classList.contains('next-page') && state.initialPage !== pagesNb
+    ? (state.curPage++, renderItems(state.curPage))
+    : null
 
-
-  (e.target.classList.contains("prev-page") && state.initialPage !== state.curPage) ? (
-    state.curPage--,
-    renderItems(state.curPage)
-  ) : null
+  e.target.classList.contains('prev-page') &&
+  state.initialPage !== state.curPage
+    ? (state.curPage--, renderItems(state.curPage))
+    : null
 
   displayBtns(state.curPage)
 }
 
-nav.addEventListener("click", controlBtns)
+nav.addEventListener('click', controlBtns)

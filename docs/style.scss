@@ -59,7 +59,7 @@ h1 {
         transition: 0.15s;
 
         &:after {
-          content: "\00d7";
+          content: '\00d7';
         }
 
         &:hover {
@@ -184,7 +184,7 @@ header {
       transition: all 0.5s;
 
       &:before {
-        content: "";
+        content: '';
         width: 2em;
         height: 2px;
         position: absolute;
@@ -196,7 +196,7 @@ header {
       }
 
       &:after {
-        content: "";
+        content: '';
         width: 2em;
         height: 2px;
         position: absolute;
@@ -213,13 +213,13 @@ header {
         transform: translate(-50%, 0%) rotate(45deg);
 
         &:before {
-          content: "";
+          content: '';
           top: 0;
           transform: translate(-50%, 0%) rotate(90deg);
         }
 
         &:after {
-          content: "";
+          content: '';
           top: 0;
           transform: translate(-50%, 0%) rotate(-90deg);
         }
