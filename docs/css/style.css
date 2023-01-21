@@ -211,6 +211,12 @@ header .menu-btn.active span:after {
   text-align: center;
   margin-bottom: 1rem;
 }
+.menu nav ul li .link-accent {
+  color: green;
+}
+.menu nav ul li .link-accent:hover {
+  background-color: green;
+}
 .menu nav ul li:last-child {
   margin-bottom: 0;
 }

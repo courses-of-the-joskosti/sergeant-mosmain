@@ -267,6 +267,14 @@ header {
         text-align: center;
         margin-bottom: 1rem;
 
+        .link-accent {
+          color: green;
+
+          &:hover {
+            background-color: green;
+          }
+        }
+
         &:last-child {
           margin-bottom: 0;
         }
