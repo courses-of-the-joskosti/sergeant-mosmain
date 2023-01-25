@@ -56,9 +56,10 @@ function slide(
     posInitial: number,
     posFinal: number,
     threshold: number = 100,
-    slides: NodeListOf<Element> = items.querySelectorAll<HTMLElement>('slide'),
+    slides: HTMLCollectionOf<Element> = items.getElementsByClassName('slide'),
     slidesLength: number = slides.length,
-    slideSize: number = items.querySelector<HTMLElement>('slide').offsetWidth,
+    slideSize: number =
+      items.querySelectorAll<HTMLElement>('.slide')[0].offsetWidth,
     firstSlide: Element = slides[0],
     lastSlide: Element = slides[slidesLength - 1],
     cloneFirst: Node = firstSlide.cloneNode(true),
@@ -80,32 +81,41 @@ function slide(
   items.addEventListener('touchmove', dragAction)
 
   // Click events
-  prev.addEventListener('click', (): void => shiftSlide(-1, 'drag'))
-  next.addEventListener('click', (): void => shiftSlide(1, 'drag'))
+  prev.addEventListener('click', (): void => shiftSlide(-1, null))
+  next.addEventListener('click', (): void => shiftSlide(1, null))
 
   // Transition events
   items.addEventListener('transitionend', checkIndex)
 
-  function dragStart(e: TouchEvent): void {
+  function dragStart(e: MouseEvent | TouchEvent | Event): void {
     e = e || window.event
     e.preventDefault()
     posInitial = items.offsetLeft
+    console.log(e.type)
 
-    e.type == 'touchstart'
-      ? (posX1 = e.touches[0].clientX)
-      : ((posX1 = e.clientX),
-        (document.onmouseup = dragEnd),
-        (document.onmousemove = dragAction))
+    if (window.TouchEvent && e instanceof TouchEvent && e.type == 'touchmove') {
+      console.log('touch event')
+      posX1 = e.touches[0].clientX
+    } else if (window.MouseEvent && e instanceof MouseEvent && e.type == 'mousedown') {
+      console.log('mouse event')
+      posX1 = e.clientX
+      document.onmouseup = dragEnd
+      document.onmousemove = dragAction
+    }
   }
 
-  function dragAction(e) {
+  function dragAction(e: MouseEvent | TouchEvent | Event): void {
     e = e || window.event
 
-    e.type == 'touchmove'
-      ? ((posX2 = posX1 - e.touches[0].clientX), (posX1 = e.touches[0].clientX))
-      : ((posX2 = posX1 - e.clientX), (posX1 = e.clientX))
+    if (window.TouchEvent && e instanceof TouchEvent && e.type == 'touchmove') {
+      posX2 = posX1 - e.touches[0].clientX
+      posX1 = e.touches[0].clientX
+    } else if (window.MouseEvent && e instanceof MouseEvent && e.type == 'mousemove') {
+      posX2 = posX1 - e.clientX
+      posX1 = e.clientX
+    }
 
-    items.style.left = items.offsetLeft - posX2 + 'px'
+    items.style.left = items.offsetLeft - posX2 + 'px'    
   }
 
   function dragEnd() {
@@ -121,7 +131,7 @@ function slide(
     document.onmousemove = null
   }
 
-  function shiftSlide(dir, action) {
+  function shiftSlide(dir: number, action: string): void {
     items.classList.add('shifting')
 
     if (allowShift) {

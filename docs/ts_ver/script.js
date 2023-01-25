@@ -32,7 +32,7 @@ productContainers.forEach(function (item, i) {
 // inf carousel
 var slider = document.getElementById('slider'), sliderItems = document.getElementById('slides'), prev = document.getElementById('prev'), next = document.getElementById('next');
 function slide(wrapper, items, prev, next) {
-    var posX1 = 0, posX2 = 0, posInitial, posFinal, threshold = 100, slides = items.querySelectorAll('slide'), slidesLength = slides.length, slideSize = items.querySelector('slide').offsetWidth, firstSlide = slides[0], lastSlide = slides[slidesLength - 1], cloneFirst = firstSlide.cloneNode(true), cloneLast = lastSlide.cloneNode(true), index = 0, allowShift = true;
+    var posX1 = 0, posX2 = 0, posInitial, posFinal, threshold = 100, slides = items.getElementsByClassName('slide'), slidesLength = slides.length, slideSize = items.querySelectorAll('.slide')[0].offsetWidth, firstSlide = slides[0], lastSlide = slides[slidesLength - 1], cloneFirst = firstSlide.cloneNode(true), cloneLast = lastSlide.cloneNode(true), index = 0, allowShift = true;
     // Clone first and last slide
     items.appendChild(cloneFirst);
     items.insertBefore(cloneLast, firstSlide);
@@ -44,25 +44,36 @@ function slide(wrapper, items, prev, next) {
     items.addEventListener('touchend', dragEnd);
     items.addEventListener('touchmove', dragAction);
     // Click events
-    prev.addEventListener('click', function () { return shiftSlide(-1, 'drag'); });
-    next.addEventListener('click', function () { return shiftSlide(1, 'drag'); });
+    prev.addEventListener('click', function () { return shiftSlide(-1, null); });
+    next.addEventListener('click', function () { return shiftSlide(1, null); });
     // Transition events
     items.addEventListener('transitionend', checkIndex);
     function dragStart(e) {
         e = e || window.event;
         e.preventDefault();
         posInitial = items.offsetLeft;
-        e.type == 'touchstart'
-            ? (posX1 = e.touches[0].clientX)
-            : ((posX1 = e.clientX),
-                (document.onmouseup = dragEnd),
-                (document.onmousemove = dragAction));
+        console.log(e.type);
+        if (window.TouchEvent && e instanceof TouchEvent && e.type == 'touchmove') {
+            console.log('touch event');
+            posX1 = e.touches[0].clientX;
+        }
+        else if (window.MouseEvent && e instanceof MouseEvent && e.type == 'mousedown') {
+            console.log('mouse event');
+            posX1 = e.clientX;
+            document.onmouseup = dragEnd;
+            document.onmousemove = dragAction;
+        }
     }
     function dragAction(e) {
         e = e || window.event;
-        e.type == 'touchmove'
-            ? ((posX2 = posX1 - e.touches[0].clientX), (posX1 = e.touches[0].clientX))
-            : ((posX2 = posX1 - e.clientX), (posX1 = e.clientX));
+        if (window.TouchEvent && e instanceof TouchEvent && e.type == 'touchmove') {
+            posX2 = posX1 - e.touches[0].clientX;
+            posX1 = e.touches[0].clientX;
+        }
+        else if (window.MouseEvent && e instanceof MouseEvent && e.type == 'mousemove') {
+            posX2 = posX1 - e.clientX;
+            posX1 = e.clientX;
+        }
         items.style.left = items.offsetLeft - posX2 + 'px';
     }
     function dragEnd() {
