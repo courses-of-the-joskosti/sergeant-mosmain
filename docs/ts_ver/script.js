@@ -53,7 +53,7 @@ function slide(wrapper, items, prev, next) {
         e.preventDefault();
         posInitial = items.offsetLeft;
         console.log(e.type);
-        if (window.TouchEvent && e instanceof TouchEvent && e.type == 'touchmove') {
+        if (window.TouchEvent && e instanceof TouchEvent && e.type == 'touchstart') {
             console.log('touch event');
             posX1 = e.touches[0].clientX;
         }
