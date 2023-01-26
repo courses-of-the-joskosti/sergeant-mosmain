@@ -131,3 +131,29 @@ popup.addEventListener('click', function (e) {
         ? ((popup.style.display = 'none'), root.classList.toggle('overflow-hidden'))
         : null;
 });
+// search
+var listSearch = document.querySelector('.list-search');
+var listItems = document.querySelectorAll('.list li');
+listSearch.addEventListener('input', function (e) {
+    var searchValue = e.target.value, str;
+    searchValue
+        ? listItems.forEach(function (item) {
+            var transformText = item.innerText.toLowerCase();
+            transformText.search(searchValue) == -1
+                ? ((item.hidden = true), (item.innerHTML = item.innerText))
+                : ((item.hidden = false),
+                    (str = item.innerText),
+                    (item.innerHTML = insertMark(str, transformText.search(searchValue), searchValue.length)));
+        })
+        : listItems.forEach(function (item) {
+            item.hidden = false;
+            item.innerHTML = item.innerText;
+        });
+});
+function insertMark(string, pos, len) {
+    return (string.slice(0, pos) +
+        '<mark>' +
+        string.slice(pos, pos + len) +
+        '</mark>' +
+        string.slice(pos + len));
+}

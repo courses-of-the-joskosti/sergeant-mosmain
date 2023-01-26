@@ -191,3 +191,40 @@ popup.addEventListener('click', (e: Event): void => {
     ? ((popup.style.display = 'none'), root.classList.toggle('overflow-hidden'))
     : null
 })
+
+// search
+const listSearch: HTMLElement = document.querySelector('.list-search')
+const listItems: NodeListOf<Element> = document.querySelectorAll('.list li')
+
+listSearch.addEventListener('input', (e: Event) => {
+  let searchValue: string = (e.target as HTMLTextAreaElement).value, str
+
+  searchValue
+    ? listItems.forEach((item: Element) => {
+        let transformText = (item as HTMLElement).innerText.toLowerCase()
+
+        transformText.search(searchValue) == -1
+          ? (((item as HTMLElement).hidden = true), (item.innerHTML = (item as HTMLElement).innerText))
+          : (((item as HTMLElement).hidden = false),
+            (str = (item as HTMLElement).innerText),
+            (item.innerHTML = insertMark(
+              str,
+              transformText.search(searchValue),
+              searchValue.length,
+            )))
+      })
+    : listItems.forEach((item) => {
+      (item as HTMLElement).hidden = false
+        item.innerHTML = (item as HTMLElement).innerText
+      })
+})
+
+function insertMark(string: string, pos: number, len: number) {
+  return (
+    string.slice(0, pos) +
+    '<mark>' +
+    string.slice(pos, pos + len) +
+    '</mark>' +
+    string.slice(pos + len)
+  )
+}
