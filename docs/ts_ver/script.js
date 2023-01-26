@@ -1,3 +1,12 @@
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
 var root = document.getElementsByTagName('html')[0];
 // burger button and menu
 var menuBtn = document.querySelector('.menu-btn');
@@ -157,3 +166,62 @@ function insertMark(string, pos, len) {
         '</mark>' +
         string.slice(pos + len));
 }
+// paginations
+var itemsContainer = document.querySelector('.pagination-list');
+var items = document.querySelectorAll('.pagination-item');
+var nav = document.querySelector('.pagination-buttons');
+var buttons = document.querySelectorAll('.pagination-buttons');
+var nextBtn = document.querySelector('.next-page');
+var prevBtn = document.querySelector('.prev-page');
+var state = {
+    // @ts-ignore
+    allItems: __spreadArray([], items, true),
+    maximumItems: 10,
+    initialPage: 1,
+    totalPages: function () {
+        return Math.ceil(state.allItems.length / state.maximumItems);
+    },
+    curPage: 1
+};
+var getItems = function (page) {
+    state.allItems.forEach(function (item) { return item.remove(); });
+    var min = (page - 1) * state.maximumItems;
+    var max = page * state.maximumItems;
+    return state.allItems.slice(min, max);
+};
+var renderItems = function (page) {
+    var items = getItems(page);
+    items.forEach(function (item) { return itemsContainer.append(item); });
+};
+renderItems(state.initialPage);
+var displayBtns = function (page) {
+    //only one page
+    state.totalPages() === state.initialPage
+        ? buttons.forEach(function (btn) { return (btn.disabled = true); })
+        : null;
+    //last page
+    page === state.totalPages() && page !== state.initialPage
+        ? ((nextBtn.disabled = true), (prevBtn.disabled = false))
+        : null;
+    //1st page
+    page === state.initialPage && state.totalPages() > state.initialPage
+        ? ((nextBtn.disabled = false), (prevBtn.disabled = true))
+        : null;
+    //not the 1st page and not the last one
+    page !== state.initialPage && page < state.totalPages()
+        ? ((nextBtn.disabled = false), (prevBtn.disabled = false))
+        : null;
+};
+displayBtns(state.initialPage);
+var controlBtns = function (e) {
+    var pagesNb = state.totalPages();
+    e.target.classList.contains('next-page') && state.initialPage !== pagesNb
+        ? (state.curPage++, renderItems(state.curPage))
+        : null;
+    e.target.classList.contains('prev-page') &&
+        state.initialPage !== state.curPage
+        ? (state.curPage--, renderItems(state.curPage))
+        : null;
+    displayBtns(state.curPage);
+};
+nav.addEventListener('click', controlBtns);
