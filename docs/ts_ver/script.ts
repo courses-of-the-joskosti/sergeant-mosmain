@@ -93,10 +93,18 @@ function slide(
     posInitial = items.offsetLeft
     console.log(e.type)
 
-    if (window.TouchEvent && e instanceof TouchEvent && e.type == 'touchstart') {
+    if (
+      window.TouchEvent &&
+      e instanceof TouchEvent &&
+      e.type == 'touchstart'
+    ) {
       console.log('touch event')
       posX1 = e.touches[0].clientX
-    } else if (window.MouseEvent && e instanceof MouseEvent && e.type == 'mousedown') {
+    } else if (
+      window.MouseEvent &&
+      e instanceof MouseEvent &&
+      e.type == 'mousedown'
+    ) {
       console.log('mouse event')
       posX1 = e.clientX
       document.onmouseup = dragEnd
@@ -110,12 +118,16 @@ function slide(
     if (window.TouchEvent && e instanceof TouchEvent && e.type == 'touchmove') {
       posX2 = posX1 - e.touches[0].clientX
       posX1 = e.touches[0].clientX
-    } else if (window.MouseEvent && e instanceof MouseEvent && e.type == 'mousemove') {
+    } else if (
+      window.MouseEvent &&
+      e instanceof MouseEvent &&
+      e.type == 'mousemove'
+    ) {
       posX2 = posX1 - e.clientX
       posX1 = e.clientX
     }
 
-    items.style.left = items.offsetLeft - posX2 + 'px'    
+    items.style.left = items.offsetLeft - posX2 + 'px'
   }
 
   function dragEnd() {
@@ -162,3 +174,20 @@ function slide(
 }
 
 slide(slider, sliderItems, prev, next)
+
+// pop-up
+const popup: HTMLElement = document.querySelector('.popup')
+const showPopup: HTMLElement = document.querySelector('.show-popup')
+
+showPopup.addEventListener('click', (): void => {
+  popup.style.display = 'block'
+  root.classList.toggle('overflow-hidden')
+})
+
+popup.addEventListener('click', (e: Event): void => {
+  ;(e.target as HTMLElement).matches('.popup') ||
+  (e.target as HTMLElement).matches('.popup-close') ||
+  (e.target as HTMLElement).matches('.popup-btn-close')
+    ? ((popup.style.display = 'none'), root.classList.toggle('overflow-hidden'))
+    : null
+})
