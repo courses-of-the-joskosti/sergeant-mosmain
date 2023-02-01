@@ -178,7 +178,6 @@ const buttons = document.querySelectorAll('.pagination-buttons');
 const nextBtn = document.querySelector('.next-page');
 const prevBtn = document.querySelector('.prev-page');
 const state = {
-    // @ts-ignore
     allItems: [...items],
     maximumItems: 10,
     initialPage: 1,

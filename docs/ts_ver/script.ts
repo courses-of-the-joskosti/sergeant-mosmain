@@ -220,11 +220,11 @@ popup.addEventListener('click', (e: Event): void => {
 const listSearch: HTMLElement = document.querySelector('.list-search')
 const listItems: NodeListOf<Element> = document.querySelectorAll('.list li')
 
-listSearch.addEventListener('input', (e: Event) => {
+listSearch.addEventListener('input', (e: Event): void => {
   let searchValue: string = (e.target as HTMLTextAreaElement).value, str
 
   searchValue
-    ? listItems.forEach((item: Element) => {
+    ? listItems.forEach((item: Element): void => {
         let transformText = (item as HTMLElement).innerText.toLowerCase()
 
         transformText.search(searchValue) == -1
@@ -237,7 +237,7 @@ listSearch.addEventListener('input', (e: Event) => {
               searchValue.length,
             )))
       })
-    : listItems.forEach((item) => {
+    : listItems.forEach((item: Element): void => {
       (item as HTMLElement).hidden = false
         item.innerHTML = (item as HTMLElement).innerText
       })
@@ -262,7 +262,6 @@ const nextBtn: HTMLInputElement = document.querySelector('.next-page')
 const prevBtn: HTMLInputElement = document.querySelector('.prev-page')
 
 const state = {
-  // @ts-ignore
   allItems: [...items],
   maximumItems: 10 as number,
   initialPage: 1 as number,
@@ -273,14 +272,14 @@ const state = {
 }
 
 const getItems = (page: number): Element[] => {
-  state.allItems.forEach((item) => item.remove())
+  state.allItems.forEach((item: HTMLElement): void => item.remove())
   const min = (page - 1) * state.maximumItems
   const max = page * state.maximumItems
 
   return state.allItems.slice(min, max)
 }
 
-const renderItems = (page: number) => {
+const renderItems = (page: number): void => {
   const items = getItems(page)
   items.forEach((item: Element): void => itemsContainer.append(item))
 }
@@ -290,7 +289,7 @@ renderItems(state.initialPage)
 const displayBtns = (page: number): void => {
   //only one page
   state.totalPages() === state.initialPage
-    ? buttons.forEach((btn) => (btn.disabled = true))
+    ? buttons.forEach((btn: HTMLInputElement): boolean => (btn.disabled = true))
     : null
 
   //last page
@@ -327,3 +326,4 @@ const controlBtns = (e: Event): void => {
 }
 
 nav.addEventListener('click', controlBtns)
+
