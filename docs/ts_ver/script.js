@@ -1,23 +1,27 @@
-var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
-    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-        if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-        }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-};
-var root = document.getElementsByTagName('html')[0];
+import { Accordion, Tab } from './classes.js';
+const root = document.getElementsByTagName('html')[0];
+// accordions
+const accordionTop = new Accordion('.accBtn');
+const accordionBottom = new Accordion('.accBtn-bottom');
+accordionTop.showOne();
+accordionTop.closeButton('.closeTopAccordions');
+accordionBottom.showAll();
+accordionBottom.closeButton('.closeBottomAccordions');
+// tabs
+const tabsTop = new Tab('.tabsExample', '.tabLink', '.tabContent');
+const tabsBottom = new Tab('.tabsExample-bottom', '.tabLink-bottom', '.tabContent-bottom');
+tabsTop.show();
+tabsBottom.show();
 // burger button and menu
-var menuBtn = document.querySelector('.menu-btn');
-var menu = document.querySelector('.menu');
-var menuLink = document.querySelector('.menu-links');
-menuBtn.addEventListener('click', function () {
+const menuBtn = document.querySelector('.menu-btn');
+const menu = document.querySelector('.menu');
+const menuLink = document.querySelector('.menu-links');
+menuBtn.addEventListener('click', () => {
     menuBtn.classList.toggle('active');
     menu.classList.toggle('active');
     root.classList.toggle('overflow-hidden');
 });
-menuLink.addEventListener('click', function (event) {
+menuLink.addEventListener('click', (event) => {
     if (event.target.matches('li a')) {
         menuBtn.classList.remove('active');
         menu.classList.remove('active');
@@ -25,23 +29,23 @@ menuLink.addEventListener('click', function (event) {
     }
 });
 // slider
-var productContainers = document.querySelectorAll('.product-container');
-var nxtBtn = document.querySelectorAll('.nxt-btn');
-var preBtn = document.querySelectorAll('.pre-btn');
-productContainers.forEach(function (item, i) {
-    var containerDimensions = item.firstElementChild.getBoundingClientRect();
-    var containerWidth = containerDimensions.width;
-    nxtBtn[i].addEventListener('click', function () {
+const productContainers = document.querySelectorAll('.product-container');
+const nxtBtn = document.querySelectorAll('.nxt-btn');
+const preBtn = document.querySelectorAll('.pre-btn');
+productContainers.forEach((item, i) => {
+    let containerDimensions = item.firstElementChild.getBoundingClientRect();
+    let containerWidth = containerDimensions.width;
+    nxtBtn[i].addEventListener('click', () => {
         item.scrollLeft += containerWidth;
     });
-    preBtn[i].addEventListener('click', function () {
+    preBtn[i].addEventListener('click', () => {
         item.scrollLeft -= containerWidth;
     });
 });
 // inf carousel
-var slider = document.getElementById('slider'), sliderItems = document.getElementById('slides'), prev = document.getElementById('prev'), next = document.getElementById('next');
+let slider = document.getElementById('slider'), sliderItems = document.getElementById('slides'), prev = document.getElementById('prev'), next = document.getElementById('next');
 function slide(wrapper, items, prev, next) {
-    var posX1 = 0, posX2 = 0, posInitial, posFinal, threshold = 100, slides = items.getElementsByClassName('slide'), slidesLength = slides.length, slideSize = items.querySelectorAll('.slide')[0].offsetWidth, firstSlide = slides[0], lastSlide = slides[slidesLength - 1], cloneFirst = firstSlide.cloneNode(true), cloneLast = lastSlide.cloneNode(true), index = 0, allowShift = true;
+    let posX1 = 0, posX2 = 0, posInitial, posFinal, threshold = 100, slides = items.getElementsByClassName('slide'), slidesLength = slides.length, slideSize = items.querySelectorAll('.slide')[0].offsetWidth, firstSlide = slides[0], lastSlide = slides[slidesLength - 1], cloneFirst = firstSlide.cloneNode(true), cloneLast = lastSlide.cloneNode(true), index = 0, allowShift = true;
     // Clone first and last slide
     items.appendChild(cloneFirst);
     items.insertBefore(cloneLast, firstSlide);
@@ -53,8 +57,8 @@ function slide(wrapper, items, prev, next) {
     items.addEventListener('touchend', dragEnd);
     items.addEventListener('touchmove', dragAction);
     // Click events
-    prev.addEventListener('click', function () { return shiftSlide(-1, null); });
-    next.addEventListener('click', function () { return shiftSlide(1, null); });
+    prev.addEventListener('click', () => shiftSlide(-1, null));
+    next.addEventListener('click', () => shiftSlide(1, null));
     // Transition events
     items.addEventListener('transitionend', checkIndex);
     function dragStart(e) {
@@ -126,13 +130,13 @@ function slide(wrapper, items, prev, next) {
 }
 slide(slider, sliderItems, prev, next);
 // pop-up
-var popup = document.querySelector('.popup');
-var showPopup = document.querySelector('.show-popup');
-showPopup.addEventListener('click', function () {
+const popup = document.querySelector('.popup');
+const showPopup = document.querySelector('.show-popup');
+showPopup.addEventListener('click', () => {
     popup.style.display = 'block';
     root.classList.toggle('overflow-hidden');
 });
-popup.addEventListener('click', function (e) {
+popup.addEventListener('click', (e) => {
     ;
     e.target.matches('.popup') ||
         e.target.matches('.popup-close') ||
@@ -141,20 +145,20 @@ popup.addEventListener('click', function (e) {
         : null;
 });
 // search
-var listSearch = document.querySelector('.list-search');
-var listItems = document.querySelectorAll('.list li');
-listSearch.addEventListener('input', function (e) {
-    var searchValue = e.target.value, str;
+const listSearch = document.querySelector('.list-search');
+const listItems = document.querySelectorAll('.list li');
+listSearch.addEventListener('input', (e) => {
+    let searchValue = e.target.value, str;
     searchValue
-        ? listItems.forEach(function (item) {
-            var transformText = item.innerText.toLowerCase();
+        ? listItems.forEach((item) => {
+            let transformText = item.innerText.toLowerCase();
             transformText.search(searchValue) == -1
                 ? ((item.hidden = true), (item.innerHTML = item.innerText))
                 : ((item.hidden = false),
                     (str = item.innerText),
                     (item.innerHTML = insertMark(str, transformText.search(searchValue), searchValue.length)));
         })
-        : listItems.forEach(function (item) {
+        : listItems.forEach((item) => {
             item.hidden = false;
             item.innerHTML = item.innerText;
         });
@@ -167,37 +171,37 @@ function insertMark(string, pos, len) {
         string.slice(pos + len));
 }
 // paginations
-var itemsContainer = document.querySelector('.pagination-list');
-var items = document.querySelectorAll('.pagination-item');
-var nav = document.querySelector('.pagination-buttons');
-var buttons = document.querySelectorAll('.pagination-buttons');
-var nextBtn = document.querySelector('.next-page');
-var prevBtn = document.querySelector('.prev-page');
-var state = {
+const itemsContainer = document.querySelector('.pagination-list');
+const items = document.querySelectorAll('.pagination-item');
+const nav = document.querySelector('.pagination-buttons');
+const buttons = document.querySelectorAll('.pagination-buttons');
+const nextBtn = document.querySelector('.next-page');
+const prevBtn = document.querySelector('.prev-page');
+const state = {
     // @ts-ignore
-    allItems: __spreadArray([], items, true),
+    allItems: [...items],
     maximumItems: 10,
     initialPage: 1,
-    totalPages: function () {
+    totalPages() {
         return Math.ceil(state.allItems.length / state.maximumItems);
     },
-    curPage: 1
+    curPage: 1,
 };
-var getItems = function (page) {
-    state.allItems.forEach(function (item) { return item.remove(); });
-    var min = (page - 1) * state.maximumItems;
-    var max = page * state.maximumItems;
+const getItems = (page) => {
+    state.allItems.forEach((item) => item.remove());
+    const min = (page - 1) * state.maximumItems;
+    const max = page * state.maximumItems;
     return state.allItems.slice(min, max);
 };
-var renderItems = function (page) {
-    var items = getItems(page);
-    items.forEach(function (item) { return itemsContainer.append(item); });
+const renderItems = (page) => {
+    const items = getItems(page);
+    items.forEach((item) => itemsContainer.append(item));
 };
 renderItems(state.initialPage);
-var displayBtns = function (page) {
+const displayBtns = (page) => {
     //only one page
     state.totalPages() === state.initialPage
-        ? buttons.forEach(function (btn) { return (btn.disabled = true); })
+        ? buttons.forEach((btn) => (btn.disabled = true))
         : null;
     //last page
     page === state.totalPages() && page !== state.initialPage
@@ -213,8 +217,8 @@ var displayBtns = function (page) {
         : null;
 };
 displayBtns(state.initialPage);
-var controlBtns = function (e) {
-    var pagesNb = state.totalPages();
+const controlBtns = (e) => {
+    const pagesNb = state.totalPages();
     e.target.classList.contains('next-page') && state.initialPage !== pagesNb
         ? (state.curPage++, renderItems(state.curPage))
         : null;

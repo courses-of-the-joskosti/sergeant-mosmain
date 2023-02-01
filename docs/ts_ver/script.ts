@@ -1,4 +1,28 @@
+import { Accordion, Tab } from './classes.js'
+
 const root: HTMLElement = document.getElementsByTagName('html')[0]
+
+// accordions
+const accordionTop: Accordion = new Accordion('.accBtn')
+const accordionBottom: Accordion = new Accordion('.accBtn-bottom')
+
+accordionTop.showOne()
+accordionTop.closeButton('.closeTopAccordions')
+
+accordionBottom.showAll()
+accordionBottom.closeButton('.closeBottomAccordions')
+
+// tabs
+const tabsTop: Tab = new Tab('.tabsExample', '.tabLink', '.tabContent')
+const tabsBottom: Tab = new Tab(
+  '.tabsExample-bottom',
+  '.tabLink-bottom',
+  '.tabContent-bottom',
+)
+
+tabsTop.show()
+
+tabsBottom.show()
 
 // burger button and menu
 const menuBtn: HTMLElement = document.querySelector('.menu-btn')
