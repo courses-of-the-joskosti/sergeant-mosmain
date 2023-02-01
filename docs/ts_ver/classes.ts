@@ -1,22 +1,24 @@
 export class Accordion {
-  constructor(heading) {
+  heading: string
+
+  constructor(heading: string) {
     this.heading = heading
   }
 
   showOne() {
-    const accordionHeading = document.querySelectorAll(this.heading)
+    const accordionHeading: NodeListOf<HTMLElement> = document.querySelectorAll(this.heading)
 
-    accordionHeading.forEach((item) => {
+    accordionHeading.forEach((item: HTMLElement): void => {
       item.addEventListener('click', () => {
         accordionHeading.forEach((element) => {
           element.classList.contains('active')
             ? (element.classList.remove('active'),
-              (element.nextElementSibling.style.display = 'none'))
+              ((element.nextElementSibling as HTMLElement).style.display = 'none'))
             : null
         })
 
-        item.classList.add('active')
-        item.nextElementSibling.style.display = 'block'
+        item.classList.add('active');
+        (item.nextElementSibling as HTMLElement).style.display = 'block'
       })
     })
   }
@@ -28,22 +30,22 @@ export class Accordion {
       item.addEventListener('click', () => {
         item.classList.contains('active')
           ? (item.classList.remove('active'),
-            (item.nextElementSibling.style.display = 'none'))
+            ((item.nextElementSibling as HTMLElement).style.display = 'none'))
           : (item.classList.add('active'),
-            (item.nextElementSibling.style.display = 'block'))
+            ((item.nextElementSibling as HTMLElement).style.display = 'block'))
       })
     })
   }
 
-  closeButton(clear) {
-    const accordionHeading = document.querySelectorAll(this.heading)
-    const closeButton = document.querySelector(clear)
+  closeButton(clear: string) {
+    const accordionHeading: NodeListOf<HTMLElement> = document.querySelectorAll(this.heading)
+    const closeButton: HTMLElement = document.querySelector(clear)
 
     closeButton.addEventListener('click', () => {
       accordionHeading.forEach((element) => {
         element.classList.contains('active')
           ? (element.classList.remove('active'),
-            (element.nextElementSibling.style.display = 'none'))
+            ((element.nextElementSibling as HTMLElement).style.display = 'none'))
           : null
       })
     })
@@ -51,26 +53,30 @@ export class Accordion {
 }
 
 export class Tab {
-  constructor(tabs, button, content) {
+  tabs: string
+  button: string
+  content: string
+
+  constructor(tabs: string, button: string, content: string) {
     this.tabs = tabs
     this.button = button
     this.content = content
   }
 
   show() {
-    const domTabs = document.querySelector(this.tabs)
-    const domTabsButton = document.querySelectorAll(this.button)
-    const domTabsContent = document.querySelectorAll(this.content)
+    const domTabs: HTMLElement = document.querySelector(this.tabs)
+    const domTabsButton: NodeListOf<HTMLElement> = document.querySelectorAll(this.button)
+    const domTabsContent: NodeListOf<HTMLElement> = document.querySelectorAll(this.content)
 
-    domTabs.addEventListener('click', (event) => {
-      const id = event.target.dataset.id
+    domTabs.addEventListener('click', (event: Event): void => {
+      const id = (event.target as HTMLElement).dataset.id
       if (id) {
-        domTabsButton.forEach((btn) => {
+        domTabsButton.forEach((btn: Element): void => {
           btn.classList.remove('active')
-        })
-        event.target.classList.add('active')
+        });
+        (event.target as HTMLElement).classList.add('active')
 
-        domTabsContent.forEach((content) => {
+        domTabsContent.forEach((content: Element): void => {
           content.classList.remove('active')
         })
         document.getElementById(id).classList.add('active')
