@@ -44,10 +44,10 @@ menuLink.addEventListener('click', (event: Event): void => {
 })
 
 // slider
-const productContainers =
-  document.querySelectorAll<HTMLElement>('.product-container')
-const nxtBtn = document.querySelectorAll<HTMLElement>('.nxt-btn')
-const preBtn = document.querySelectorAll<HTMLElement>('.pre-btn')
+const productContainers: NodeListOf<HTMLElement> =
+  document.querySelectorAll('.product-container')
+const nxtBtn: NodeListOf<HTMLElement> = document.querySelectorAll('.nxt-btn')
+const preBtn: NodeListOf<HTMLElement> = document.querySelectorAll('.pre-btn')
 
 productContainers.forEach((item: Element, i: number): void => {
   let containerDimensions: DOMRect =
@@ -151,7 +151,7 @@ function slide(
     items.style.left = items.offsetLeft - posX2 + 'px'
   }
 
-  function dragEnd() {
+  function dragEnd(): void {
     posFinal = items.offsetLeft
 
     posFinal - posInitial < -threshold
@@ -180,7 +180,7 @@ function slide(
     allowShift = false
   }
 
-  function checkIndex() {
+  function checkIndex(): void {
     items.classList.remove('shifting')
 
     index == -1
@@ -218,14 +218,16 @@ const listSearch: HTMLElement = document.querySelector('.list-search')
 const listItems: NodeListOf<Element> = document.querySelectorAll('.list li')
 
 listSearch.addEventListener('input', (e: Event): void => {
-  let searchValue: string = (e.target as HTMLTextAreaElement).value, str
+  let searchValue: string = (e.target as HTMLTextAreaElement).value,
+    str
 
   searchValue
     ? listItems.forEach((item: Element): void => {
         let transformText = (item as HTMLElement).innerText.toLowerCase()
 
         transformText.search(searchValue) == -1
-          ? (((item as HTMLElement).hidden = true), (item.innerHTML = (item as HTMLElement).innerText))
+          ? (((item as HTMLElement).hidden = true),
+            (item.innerHTML = (item as HTMLElement).innerText))
           : (((item as HTMLElement).hidden = false),
             (str = (item as HTMLElement).innerText),
             (item.innerHTML = insertMark(
@@ -235,12 +237,12 @@ listSearch.addEventListener('input', (e: Event): void => {
             )))
       })
     : listItems.forEach((item: Element): void => {
-      (item as HTMLElement).hidden = false
+        ;(item as HTMLElement).hidden = false
         item.innerHTML = (item as HTMLElement).innerText
       })
 })
 
-function insertMark(string: string, pos: number, len: number) {
+function insertMark(string: string, pos: number, len: number): string {
   return (
     string.slice(0, pos) +
     '<mark>' +
@@ -252,9 +254,12 @@ function insertMark(string: string, pos: number, len: number) {
 
 // paginations
 const itemsContainer: HTMLElement = document.querySelector('.pagination-list')
-const items: NodeListOf<HTMLElement> = document.querySelectorAll('.pagination-item')
+const items: NodeListOf<HTMLElement> =
+  document.querySelectorAll('.pagination-item')
 const nav: HTMLElement = document.querySelector('.pagination-buttons')
-const buttons: NodeListOf<HTMLInputElement> = document.querySelectorAll('.pagination-buttons')
+const buttons: NodeListOf<HTMLInputElement> = document.querySelectorAll(
+  '.pagination-buttons',
+)
 const nextBtn: HTMLInputElement = document.querySelector('.next-page')
 const prevBtn: HTMLInputElement = document.querySelector('.prev-page')
 
@@ -262,7 +267,7 @@ const state = {
   allItems: [...items],
   maximumItems: 10 as number,
   initialPage: 1 as number,
-  totalPages() {
+  totalPages(): number {
     return Math.ceil(state.allItems.length / state.maximumItems)
   },
   curPage: 1 as number,
@@ -270,14 +275,14 @@ const state = {
 
 const getItems = (page: number): Element[] => {
   state.allItems.forEach((item: HTMLElement): void => item.remove())
-  const min = (page - 1) * state.maximumItems
-  const max = page * state.maximumItems
+  const min: number = (page - 1) * state.maximumItems
+  const max: number = page * state.maximumItems
 
   return state.allItems.slice(min, max)
 }
 
 const renderItems = (page: number): void => {
-  const items = getItems(page)
+  const items: Element[] = getItems(page)
   items.forEach((item: Element): void => itemsContainer.append(item))
 }
 
@@ -308,13 +313,13 @@ const displayBtns = (page: number): void => {
 displayBtns(state.initialPage)
 
 const controlBtns = (e: Event): void => {
-  const pagesNb: number = state.totalPages();
+  const pagesNb: number = state.totalPages()
 
-  (e.target as HTMLElement).classList.contains('next-page') && state.initialPage !== pagesNb
+  ;(e.target as HTMLElement).classList.contains('next-page') &&
+  state.initialPage !== pagesNb
     ? (state.curPage++, renderItems(state.curPage))
-    : null;
-
-  (e.target as HTMLElement).classList.contains('prev-page') &&
+    : null
+  ;(e.target as HTMLElement).classList.contains('prev-page') &&
   state.initialPage !== state.curPage
     ? (state.curPage--, renderItems(state.curPage))
     : null

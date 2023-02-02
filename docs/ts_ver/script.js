@@ -150,12 +150,14 @@ listSearch.addEventListener('input', (e) => {
         ? listItems.forEach((item) => {
             let transformText = item.innerText.toLowerCase();
             transformText.search(searchValue) == -1
-                ? ((item.hidden = true), (item.innerHTML = item.innerText))
+                ? ((item.hidden = true),
+                    (item.innerHTML = item.innerText))
                 : ((item.hidden = false),
                     (str = item.innerText),
                     (item.innerHTML = insertMark(str, transformText.search(searchValue), searchValue.length)));
         })
         : listItems.forEach((item) => {
+            ;
             item.hidden = false;
             item.innerHTML = item.innerText;
         });
@@ -215,7 +217,8 @@ const displayBtns = (page) => {
 displayBtns(state.initialPage);
 const controlBtns = (e) => {
     const pagesNb = state.totalPages();
-    e.target.classList.contains('next-page') && state.initialPage !== pagesNb
+    e.target.classList.contains('next-page') &&
+        state.initialPage !== pagesNb
         ? (state.curPage++, renderItems(state.curPage))
         : null;
     e.target.classList.contains('prev-page') &&
