@@ -115,21 +115,18 @@ function slide(
     e = e || window.event
     e.preventDefault()
     posInitial = items.offsetLeft
-    console.log(e.type)
 
     if (
       window.TouchEvent &&
       e instanceof TouchEvent &&
       e.type == 'touchstart'
     ) {
-      console.log('touch event')
       posX1 = e.touches[0].clientX
     } else if (
       window.MouseEvent &&
       e instanceof MouseEvent &&
       e.type == 'mousedown'
     ) {
-      console.log('mouse event')
       posX1 = e.clientX
       document.onmouseup = dragEnd
       document.onmousemove = dragAction
@@ -326,4 +323,3 @@ const controlBtns = (e: Event): void => {
 }
 
 nav.addEventListener('click', controlBtns)
-
