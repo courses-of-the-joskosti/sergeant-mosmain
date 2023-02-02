@@ -1,4 +1,4 @@
-import { Accordion, Tab } from './classes.js';
+import { Accordion, Tab, PasswordGenerator } from './classes.js';
 const root = document.getElementsByTagName('html')[0];
 // accordions
 const accordionTop = new Accordion('.accBtn');
@@ -228,3 +228,18 @@ const controlBtns = (e) => {
     displayBtns(state.curPage);
 };
 nav.addEventListener('click', controlBtns);
+const passSlider = document.querySelector('.range__slider').querySelector('input');
+const sliderValue = document.querySelector('.length__title');
+const copyBtn = document.getElementById("copy-btn");
+const resultEl = document.getElementById("result");
+const copyInfo = document.querySelector(".result__info.right");
+const copiedInfo = document.querySelector(".result__info.left");
+const generateBtn = document.getElementById("generate");
+const lengthEl = document.getElementById("pass-slider");
+const uppercaseEl = document.getElementById("uppercase");
+const lowercaseEl = document.getElementById("lowercase");
+const numberEl = document.getElementById("number");
+const symbolEl = document.getElementById("symbol");
+const pass = new PasswordGenerator(passSlider, sliderValue, copyBtn, resultEl, copyInfo, copiedInfo, generateBtn, lengthEl, uppercaseEl, lowercaseEl, numberEl, symbolEl);
+pass.applyFill();
+pass.list();
