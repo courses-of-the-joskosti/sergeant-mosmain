@@ -5,12 +5,12 @@ export class Accordion {
     this.heading = heading
   }
 
-  showOne() {
+  showOne(): void {
     const accordionHeading: NodeListOf<HTMLElement> = document.querySelectorAll(this.heading)
 
     accordionHeading.forEach((item: HTMLElement): void => {
-      item.addEventListener('click', () => {
-        accordionHeading.forEach((element) => {
+      item.addEventListener('click', (): void => {
+        accordionHeading.forEach((element: HTMLElement): void => {
           element.classList.contains('active')
             ? (element.classList.remove('active'),
               ((element.nextElementSibling as HTMLElement).style.display = 'none'))
@@ -23,11 +23,11 @@ export class Accordion {
     })
   }
 
-  showAll() {
+  showAll(): void {
     const accordionHeading = document.querySelectorAll(this.heading)
 
-    accordionHeading.forEach((item) => {
-      item.addEventListener('click', () => {
+    accordionHeading.forEach((item: Element): void => {
+      item.addEventListener('click', (): void => {
         item.classList.contains('active')
           ? (item.classList.remove('active'),
             ((item.nextElementSibling as HTMLElement).style.display = 'none'))
@@ -37,12 +37,12 @@ export class Accordion {
     })
   }
 
-  closeButton(clear: string) {
+  closeButton(clear: string): void {
     const accordionHeading: NodeListOf<HTMLElement> = document.querySelectorAll(this.heading)
     const closeButton: HTMLElement = document.querySelector(clear)
 
-    closeButton.addEventListener('click', () => {
-      accordionHeading.forEach((element) => {
+    closeButton.addEventListener('click', (): void => {
+      accordionHeading.forEach((element: HTMLElement): void => {
         element.classList.contains('active')
           ? (element.classList.remove('active'),
             ((element.nextElementSibling as HTMLElement).style.display = 'none'))
@@ -63,13 +63,13 @@ export class Tab {
     this.content = content
   }
 
-  show() {
+  show(): void {
     const domTabs: HTMLElement = document.querySelector(this.tabs)
     const domTabsButton: NodeListOf<HTMLElement> = document.querySelectorAll(this.button)
     const domTabsContent: NodeListOf<HTMLElement> = document.querySelectorAll(this.content)
 
     domTabs.addEventListener('click', (event: Event): void => {
-      const id = (event.target as HTMLElement).dataset.id
+      const id = (event.target as HTMLElement).dataset.id as string
       if (id) {
         domTabsButton.forEach((btn: Element): void => {
           btn.classList.remove('active')
