@@ -138,7 +138,6 @@ export class PasswordGenerator {
   }
 
   applyFill(): void {
-    // this.disableOnlyCheckbox()
     const sliderProps = {
       fill: '#0B1EDF' as string,
       background: 'rgba(255, 255, 255, 0.214)' as string,
@@ -179,13 +178,13 @@ export class PasswordGenerator {
       this.copiedInfo.style.opacity = '0.75'
     })
 
-    this.generateBtn.addEventListener('click', () => {
-      const length = +(this.lengthEl as HTMLInputElement).value
-      const hasUpper = (this.uppercaseEl as HTMLInputElement).checked
-      const hasLower = (this.lowercaseEl as HTMLInputElement).checked
-      const hasNumber = (this.numberEl as HTMLInputElement).checked
-      const hasSymbol = (this.symbolEl as HTMLInputElement).checked
-      // let generatedPassword = true
+    this.generateBtn.addEventListener('click', (): void => {
+      const length: number = +(this.lengthEl as HTMLInputElement).value
+      const hasUpper: boolean = (this.uppercaseEl as HTMLInputElement).checked
+      const hasLower: boolean = (this.lowercaseEl as HTMLInputElement).checked
+      const hasNumber: boolean = (this.numberEl as HTMLInputElement).checked
+      const hasSymbol: boolean = (this.symbolEl as HTMLInputElement).checked
+
       this.resultEl.innerText = this.generatePassword(
         length,
         hasLower,
@@ -208,27 +207,19 @@ export class PasswordGenerator {
   }
 
   getRandomLower(): string {
-    // console.log(String.fromCharCode(Math.floor(Math.random() * 26) + 97))
-
     return String.fromCharCode(Math.floor(Math.random() * 26) + 97)
   }
 
   getRandomUpper(): string {
-    // console.log(String.fromCharCode(Math.floor(Math.random() * 26) + 65))
-
     return String.fromCharCode(Math.floor(Math.random() * 26) + 65)
   }
 
   getRandomNumber(): string {
-    // console.log(String.fromCharCode(Math.floor(this.secureMathRandom() * 10) + 48))
-
     return String.fromCharCode(Math.floor(this.secureMathRandom() * 10) + 48)
   }
 
   getRandomSymbol(): string {
     const symbols = '~!@#$%^&*()_+{}":?><;.,'
-    // console.log(symbols[Math.floor(Math.random() * symbols.length)])
-
     return symbols[Math.floor(Math.random() * symbols.length)]
   }
 
@@ -275,9 +266,6 @@ export class PasswordGenerator {
         } else {
           generatedPassword += this.getRandomSymbol()
         }
-
-        // generatedPassword += randomFunc[funcName as keyof Rnd]
-        // console.log(randomFunc[funcName as keyof Rnd])
       })
     }
     // console.log(generatedPassword);
@@ -287,17 +275,5 @@ export class PasswordGenerator {
       .sort(() => Math.random() - 0.5)
       .join('')
   }
-
-  // disableOnlyCheckbox() {
-  //   console.log('chiki briki');
-
-  //   let totalChecked = [this.uppercaseEl, this.lowercaseEl, this.numberEl, this.symbolEl].filter(el => (el as HTMLInputElement).checked)
-  //   totalChecked.forEach(el => {
-  //     if(totalChecked.length == 1){
-  //       (el as HTMLTextAreaElement).disabled = true;
-  //     }else{
-  //       (el as HTMLTextAreaElement).disabled = false;
-  //     }
-  //   })
-  // }
+  }
 }
