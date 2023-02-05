@@ -86,7 +86,8 @@ export class PasswordGenerator {
     lowercaseEl;
     numberEl;
     symbolEl;
-    constructor(slider, sliderValue, copyBtn, resultEl, copyInfo, copiedInfo, generateBtn, lengthEl, uppercaseEl, lowercaseEl, numberEl, symbolEl) {
+    checkboxes;
+    constructor(slider, sliderValue, copyBtn, resultEl, copyInfo, copiedInfo, generateBtn, lengthEl, uppercaseEl, lowercaseEl, numberEl, symbolEl, checkboxes) {
         this.slider = slider;
         this.sliderValue = sliderValue;
         this.copyBtn = copyBtn;
@@ -99,9 +100,9 @@ export class PasswordGenerator {
         this.lowercaseEl = lowercaseEl;
         this.numberEl = numberEl;
         this.symbolEl = symbolEl;
+        this.checkboxes = checkboxes;
     }
     applyFill() {
-        // this.disableOnlyCheckbox()
         const sliderProps = {
             fill: '#0B1EDF',
             background: 'rgba(255, 255, 255, 0.214)',
@@ -123,9 +124,6 @@ export class PasswordGenerator {
         this.copyBtn.addEventListener('click', () => {
             const textarea = document.createElement('textarea');
             const password = this.resultEl.innerText;
-            if (!password || password == 'CLICK GENERATE') {
-                return;
-            }
             textarea.value = password;
             document.body.appendChild(textarea);
             textarea.select();
@@ -142,12 +140,29 @@ export class PasswordGenerator {
             const hasLower = this.lowercaseEl.checked;
             const hasNumber = this.numberEl.checked;
             const hasSymbol = this.symbolEl.checked;
-            // let generatedPassword = true
             this.resultEl.innerText = this.generatePassword(length, hasLower, hasUpper, hasNumber, hasSymbol);
             this.copyInfo.style.transform = 'translateY(0%)';
             this.copyInfo.style.opacity = '0.75';
             this.copiedInfo.style.transform = 'translateY(200%)';
             this.copiedInfo.style.opacity = '0';
+        });
+        this.checkboxes.addEventListener('click', () => {
+            let totalChecked = [
+                this.uppercaseEl,
+                this.lowercaseEl,
+                this.numberEl,
+                this.symbolEl,
+            ].filter((el) => el.checked);
+            totalChecked.forEach((el) => {
+                if (totalChecked.length == 1) {
+                    ;
+                    el.disabled = true;
+                }
+                else {
+                    ;
+                    el.disabled = false;
+                }
+            });
         });
     }
     secureMathRandom() {
@@ -155,40 +170,30 @@ export class PasswordGenerator {
             (Math.pow(2, 32) - 1));
     }
     getRandomLower() {
-        // console.log(String.fromCharCode(Math.floor(Math.random() * 26) + 97))
         return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
     }
     getRandomUpper() {
-        // console.log(String.fromCharCode(Math.floor(Math.random() * 26) + 65))
         return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
     }
     getRandomNumber() {
-        // console.log(String.fromCharCode(Math.floor(this.secureMathRandom() * 10) + 48))
         return String.fromCharCode(Math.floor(this.secureMathRandom() * 10) + 48);
     }
     getRandomSymbol() {
         const symbols = '~!@#$%^&*()_+{}":?><;.,';
-        // console.log(symbols[Math.floor(Math.random() * symbols.length)])
         return symbols[Math.floor(Math.random() * symbols.length)];
     }
     generatePassword(length, lower, upper, number, symbol) {
-        const randomFunc = {
-            lower: this.getRandomLower(),
-            upper: this.getRandomUpper(),
-            number: this.getRandomNumber(),
-            symbol: this.getRandomSymbol(),
-        };
         const typesCount = lower || upper || number || symbol;
-        const typesArr = [{ lower }, { upper }, { number }, { symbol }].filter((item) => Object.values(item)[0]);
-        // console.log('typesArr', typesArr);
-        if (!typesCount) {
-            return '';
-        }
+        const typesArr = [
+            { lower },
+            { upper },
+            { number },
+            { symbol },
+        ].filter((item) => Object.values(item)[0]);
         let generatedPassword = '';
         for (let i = 0; i < length; i++) {
             typesArr.forEach((type) => {
                 const funcName = Object.keys(type)[0];
-                console.log(funcName);
                 if (funcName == 'lower') {
                     generatedPassword += this.getRandomLower();
                 }
@@ -201,15 +206,17 @@ export class PasswordGenerator {
                 else {
                     generatedPassword += this.getRandomSymbol();
                 }
-                // generatedPassword += randomFunc[funcName as keyof Rnd]
-                // console.log(randomFunc[funcName as keyof Rnd])
             });
         }
-        // console.log(generatedPassword);
-        return generatedPassword
-            .slice(0, length)
-            .split('')
-            .sort(() => Math.random() - 0.5)
-            .join('');
+        if (!typesCount) {
+            return (generatedPassword = 'Select one or more checkboxes.');
+        }
+        else {
+            return generatedPassword
+                .slice(0, length)
+                .split('')
+                .sort(() => Math.random() - 0.5)
+                .join('');
+        }
     }
 }

@@ -108,6 +108,7 @@ export class PasswordGenerator {
   lowercaseEl: HTMLElement
   numberEl: HTMLElement
   symbolEl: HTMLElement
+  checkboxes: HTMLInputElement
 
   constructor(
     slider: HTMLInputElement,
@@ -122,6 +123,7 @@ export class PasswordGenerator {
     lowercaseEl: HTMLElement,
     numberEl: HTMLElement,
     symbolEl: HTMLElement,
+    checkboxes: HTMLInputElement,
   ) {
     this.slider = slider
     this.sliderValue = sliderValue
@@ -135,6 +137,7 @@ export class PasswordGenerator {
     this.lowercaseEl = lowercaseEl
     this.numberEl = numberEl
     this.symbolEl = symbolEl
+    this.checkboxes = checkboxes
   }
 
   applyFill(): void {
@@ -160,12 +163,9 @@ export class PasswordGenerator {
       this.applyFill()
     })
 
-    this.copyBtn.addEventListener('click', () => {
-      const textarea = document.createElement('textarea')
-      const password = this.resultEl.innerText
-      if (!password || password == 'CLICK GENERATE') {
-        return
-      }
+    this.copyBtn.addEventListener('click', (): void => {
+      const textarea: HTMLTextAreaElement = document.createElement('textarea')
+      const password: string = this.resultEl.innerText
       textarea.value = password
       document.body.appendChild(textarea)
       textarea.select()
@@ -196,6 +196,22 @@ export class PasswordGenerator {
       this.copyInfo.style.opacity = '0.75'
       this.copiedInfo.style.transform = 'translateY(200%)'
       this.copiedInfo.style.opacity = '0'
+    })
+
+    this.checkboxes.addEventListener('click', (): void => {
+      let totalChecked: HTMLElement[] = [
+        this.uppercaseEl,
+        this.lowercaseEl,
+        this.numberEl,
+        this.symbolEl,
+      ].filter((el) => (el as HTMLInputElement).checked)
+      totalChecked.forEach((el) => {
+        if (totalChecked.length == 1) {
+          ;(el as HTMLTextAreaElement).disabled = true
+        } else {
+          ;(el as HTMLTextAreaElement).disabled = false
+        }
+      })
     })
   }
 
@@ -229,34 +245,20 @@ export class PasswordGenerator {
     upper: boolean,
     number: boolean,
     symbol: boolean,
-  ) {
-    interface Rnd {
-      lower: string
-      upper: string
-      number: string
-      symbol: string
-    }
-    const randomFunc: Rnd = {
-      lower: this.getRandomLower(),
-      upper: this.getRandomUpper(),
-      number: this.getRandomNumber(),
-      symbol: this.getRandomSymbol(),
-    }
+  ): string {
     const typesCount: boolean = lower || upper || number || symbol
 
-    const typesArr = [{ lower }, { upper }, { number }, { symbol }].filter(
-      (item) => Object.values(item)[0],
-    )
-    // console.log('typesArr', typesArr);
-
-    if (!typesCount) {
-      return ''
-    }
+    const typesArr: object[] = [
+      { lower },
+      { upper },
+      { number },
+      { symbol },
+    ].filter((item) => Object.values(item)[0])
     let generatedPassword: string = ''
+
     for (let i = 0; i < length; i++) {
-      typesArr.forEach((type) => {
-        const funcName = Object.keys(type)[0]
-        console.log(funcName)
+      typesArr.forEach((type: object): void => {
+        const funcName: string = Object.keys(type)[0]
         if (funcName == 'lower') {
           generatedPassword += this.getRandomLower()
         } else if (funcName == 'upper') {
@@ -268,12 +270,15 @@ export class PasswordGenerator {
         }
       })
     }
-    // console.log(generatedPassword);
-    return generatedPassword
-      .slice(0, length)
-      .split('')
-      .sort(() => Math.random() - 0.5)
-      .join('')
-  }
+
+    if (!typesCount) {
+      return (generatedPassword = 'Select one or more checkboxes.')
+    } else {
+      return generatedPassword
+        .slice(0, length)
+        .split('')
+        .sort((): number => Math.random() - 0.5)
+        .join('')
+    }
   }
 }

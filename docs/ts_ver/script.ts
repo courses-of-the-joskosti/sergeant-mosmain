@@ -329,18 +329,21 @@ const controlBtns = (e: Event): void => {
 
 nav.addEventListener('click', controlBtns)
 
-const passSlider: HTMLInputElement = document.querySelector('.range__slider').querySelector('input')
+const passSlider: HTMLInputElement = document
+  .querySelector('.range__slider')
+  .querySelector('input')
 const sliderValue: HTMLElement = document.querySelector('.length__title')
-const copyBtn: HTMLElement = document.getElementById("copy-btn")
-const resultEl: HTMLElement = document.getElementById("result")
-const copyInfo: HTMLElement = document.querySelector(".result__info.right")
-const copiedInfo: HTMLElement = document.querySelector(".result__info.left")
-const generateBtn: HTMLElement = document.getElementById("generate")
-const lengthEl: HTMLElement = document.getElementById("pass-slider")
-const uppercaseEl: HTMLElement = document.getElementById("uppercase")
-const lowercaseEl: HTMLElement = document.getElementById("lowercase")
-const numberEl: HTMLElement = document.getElementById("number")
-const symbolEl: HTMLElement = document.getElementById("symbol")
+const copyBtn: HTMLElement = document.getElementById('copy-btn')
+const resultEl: HTMLElement = document.getElementById('result')
+const copyInfo: HTMLElement = document.querySelector('.result__info.right')
+const copiedInfo: HTMLElement = document.querySelector('.result__info.left')
+const generateBtn: HTMLElement = document.getElementById('generate')
+const lengthEl: HTMLElement = document.getElementById('pass-slider')
+const uppercaseEl: HTMLElement = document.getElementById('uppercase')
+const lowercaseEl: HTMLElement = document.getElementById('lowercase')
+const numberEl: HTMLElement = document.getElementById('number')
+const symbolEl: HTMLElement = document.getElementById('symbol')
+const checkboxes: HTMLInputElement = document.querySelector('.settings')
 
 const pass: PasswordGenerator = new PasswordGenerator(
   passSlider,
@@ -354,7 +357,8 @@ const pass: PasswordGenerator = new PasswordGenerator(
   uppercaseEl,
   lowercaseEl,
   numberEl,
-  symbolEl
+  symbolEl,
+  checkboxes,
 )
 
 pass.applyFill()
